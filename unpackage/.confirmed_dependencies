@@ -1,0 +1,29 @@
+{
+  "dist/index.html": {
+    "href": "dist/index.html",
+    "priority": 0,
+    "resources": [
+      "dist/static/js/vendor.66fd84d79c4164e36401.js",
+      "dist/static/js/vendor.727fea52bc8507ca99ba.js",
+      "dist/static/js/vendor.5125e5dba6cd27ea1add.js",
+      "dist/static/js/app.2d79b559d1981c4f0b78.js",
+      "dist/static/js/manifest.d319374b9452be6ceeaa.js",
+      "dist/static/css/app.7f5b759bde7dac5d353cacd7744d7a7c.css"
+    ],
+    "refer": []
+  },
+  "test.html": {
+    "href": "test.html",
+    "priority": 0,
+    "resources": [],
+    "refer": []
+  },
+  "app.html": {
+    "href": "app.html",
+    "resources": [],
+    "refer": [
+      "dist/index.html"
+    ],
+    "priority": 0
+  }
+}

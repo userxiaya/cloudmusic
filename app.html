@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset=utf-8>
+		<meta name=viewport content="width=device-width,initial-scale=1">
+		<title>cloudmusic</title>
+	</head>
+
+	<body>
+		<script>
+			// 创建并显示新窗口
+			function plusReady() {
+				create()
+			}
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+
+			function create() {
+				var styles = {};
+				// 在Android5以上设备，如果默认没有开启硬件加速，则强制设置开启
+				if(!plus.webview.defaultHardwareAccelerated() && parseInt(plus.os.version) >= 5) {
+					styles.hardwareAccelerated = true;
+				}
+				var w = plus.webview.create('dist/index.html', 'index', styles);
+				plus.webview.show(w); // 显示窗口
+			}
+		</script>
+	</body>
+
+</html>
