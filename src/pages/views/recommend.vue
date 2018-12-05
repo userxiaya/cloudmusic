@@ -2,25 +2,22 @@
   <div class="main">
     <div class="main-content">
       <div class="main-content">
-        <navbar v-model="selected" class="tab">
+        <!-- <navbar v-model="selected" class="tab">
           <tab-item id="index"><span class="tab-span">推荐</span></tab-item>
           <tab-item id="rank"><span class="tab-span">排行</span></tab-item>
           <tab-item id="singer"><span class="tab-span">歌手</span></tab-item>
-        </navbar>
-        <!-- <div class="mint-navbar tab">
-          <div :class="selected==='index'?'mint-tab-item tab-item is-selected':'mint-tab-item tab-item'" @click.stop="$router.replace('/recommend/index')">
-            <div class="mint-tab-item-icon"></div>
-            <div class="mint-tab-item-label"><span class="tab-span">推荐</span></div>
+        </navbar> -->
+        <div class="tab">
+          <div class="item" @click.stop="selected='index'">
+            <div :class="selected==='index'?'tab-span true':'tab-span false'">推荐</div>
           </div>
-          <div :class="selected==='rank'?'mint-tab-item tab-item is-selected':'mint-tab-item tab-item'" @click.stop="$router.replace('/recommend/rank')">
-            <div class="mint-tab-item-icon"></div>
-            <div class="mint-tab-item-label"><span class="tab-span">排行</span></div>
+          <div class="item" @click.stop="selected='rank'">
+            <div :class="selected==='rank'?'tab-span true':'tab-span false'">排行</div>
           </div>
-          <div :class="selected==='singer'?'mint-tab-item tab-item is-selected':'mint-tab-item tab-item'" @click.stop="$router.replace('/recommend/singer')">
-            <div class="mint-tab-item-icon"></div>
-            <div class="mint-tab-item-label"><span class="tab-span">歌手</span></div>
+          <div class="item" @click.stop="selected='singer'">
+            <div :class="selected==='singer'?'tab-span true':'tab-span false'">歌手</div>
           </div>
-        </div> -->
+        </div>
         <div class="contents">
           <div class="main-content">
             <swiper :options="swiperOption" class="box" ref="swipers">
@@ -46,7 +43,7 @@
 
 <script>
 import { Navbar, TabItem } from 'mint-ui'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from '@/components/vue-awesome-swiper'
 import index from './recommend/index'
 import rank from './recommend/rank'
 import singer from './recommend/singer'
@@ -59,6 +56,7 @@ export default {
         autoplay: false,
         loop: false,
         noSwiping: true,
+        resistanceRatio: 0,
         noSwipingClass: 'stop-swiping',
         threshold: 25,
         // preventClicksPropagation: true, // 阻止click冒泡。拖动Swiper时阻止click事件。
@@ -129,12 +127,28 @@ export default {
     line-height: 44px;
     height: 50px;
     box-sizing: border-box;
-    padding-top: 6px;
     width: 100%;
     background: $color-theme;
     z-index: 99;
-    .tab-item {
+    display: flex;
+    .item {
+      flex: 1;
+      text-align: center;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tab-span {
+      width: 45px;
+      text-align: center;
       color: #e4e4e4;
+      font-size: 18px;
+      line-height: 30px;
+      height: 30px;
+      &.true{
+        border-bottom: 3px solid #f1f1f1
+      }
     }
   }
   .contents {

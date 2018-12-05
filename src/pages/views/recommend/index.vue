@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <scroll class="recommend-content" ref="scroll" :in-page="inPages" :data="bannerList" :start-y="historyPosition">
+    <scroll class="recommend-content" ref="scroll" :in-page="inPages" :data="listLoadList" :start-y="historyPosition">
       <div :style="currentSong.id?{height:'auto','padding-bottom':(bottom+60)+'px'}:{height:'auto','padding-bottom':(bottom)+'px'}" ref="scrollBox">
         <div class="banner">
           <div class="decorate" v-if="bannerList.length>0"></div>
@@ -57,12 +57,17 @@ import {
   recommendResource,
   recommendSongs
 } from '@/base/api'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from '@/components/vue-awesome-swiper'
 import { createRecommendSong } from '@/base/song'
 import scroll from '@/components/scroll'
 export default {
   data () {
     return {
+      listLoad: {
+        bannerList: false,
+        personalizedList: false,
+        newSongList: false
+      },
       swiperOption: {
         autoplay: true,
         loop: true,
@@ -106,11 +111,13 @@ export default {
               list.push(obj)
             })
             this.bannerList = list.splice(3)
+            this.listLoad.bannerList = true
           }
         }
       })
     },
     async getPersonalized (flag) {
+      this.listLoad.personalizedList = false
       let recommend = []
       if (flag) {
         const resource = await recommendResource()
@@ -141,8 +148,10 @@ export default {
         })
       }
       this.personalizedList = recommend
+      this.listLoad.personalizedList = true
     },
     async getNewsong (flag) {
+      this.listLoad.newSongList = false
       if (flag) {
         const data1 = await recommendSongs()
         const res = data1.data
@@ -162,6 +171,7 @@ export default {
           this.newSongList = list
         }
       }
+      this.listLoad.newSongList = true
     },
     play (item) {
       if (this.currentSong.id && this.currentSong.id + '' === item.id + '') {
@@ -194,7 +204,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentSong'])
+    ...mapGetters(['currentSong']),
+    listLoadList () {
+      let list = []
+      for (let key in this.listLoad) {
+        if (this.listLoad[key] === true) {
+          list.push('')
+        }
+      }
+      return list
+    }
   },
   directives: {
     item: {

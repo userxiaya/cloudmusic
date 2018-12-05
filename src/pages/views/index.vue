@@ -5,11 +5,11 @@
             <i class="iconfont icon-list"></i>
           </div>
           <div class="center">
-            <div :class="$route.path==='/myMessage'?'item active':'item'" @click.stop="$router.replace('/myMessage')">
-              <i class="iconfont icon-music"></i>
+            <div :class="$route.path==='/myMessage'?'item active':'item'">
+              <i class="iconfont icon-music" @click.stop="$router.replace('/myMessage')"></i>
             </div>
-          <div :class="$route.path.indexOf('/recommend')!=-1?'item active':'item'" @click.stop="gotoRecommend">
-            <i class="iconfont icon-logo"></i>
+          <div :class="$route.path.indexOf('/recommend')!=-1?'item active':'item'">
+            <i class="iconfont icon-logo" @click.stop="gotoRecommend"></i>
           </div>
           <div class="item">
             <i class="iconfont icon-movie"></i>

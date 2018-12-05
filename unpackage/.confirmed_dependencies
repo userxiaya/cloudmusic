@@ -8,7 +8,14 @@
       "dist/static/js/vendor.5125e5dba6cd27ea1add.js",
       "dist/static/js/app.2d79b559d1981c4f0b78.js",
       "dist/static/js/manifest.d319374b9452be6ceeaa.js",
-      "dist/static/css/app.7f5b759bde7dac5d353cacd7744d7a7c.css"
+      "dist/static/css/app.7f5b759bde7dac5d353cacd7744d7a7c.css",
+      "dist/static/js/vendor.d897600f0f9b74b09f7c.js",
+      "dist/static/js/app.794632da65df8b1bdc22.js",
+      "dist/static/css/app.85c404ce1f768ee31c0333dba3f912fa.css",
+      "dist/static/js/manifest.843db99a0910a4565945.js",
+      "dist/static/js/app.ab0a351f56a60702dbdf.js",
+      "dist/static/js/app.2096b7f7c8de5506bc71.js",
+      "dist/static/js/vendor.9bf043f815e57af0e7b8.js"
     ],
     "refer": []
   },

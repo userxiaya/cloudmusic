@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 分发click事件 -->
-    <scroll class="scroll" :click="true">
+    <scroll class="scroll" :click="true" :tap="true">
       <div class="scroll">
         <keep-alive>
           <router-view />
