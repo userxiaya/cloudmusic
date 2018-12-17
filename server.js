@@ -3,7 +3,7 @@ var app = express();
 var request = require('request');
 var app = express();
 app.use('/apis', function(req, res) {
-    var url = 'http://47.107.134.246:3000/' + req.url.replace('/apis/','');
+    var url = 'http://47.107.134.246:3000' + req.url.replace('/apis/','');
     console.log(url)
     req.pipe(request(url)).pipe(res);
 });
