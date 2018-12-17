@@ -97,3 +97,7 @@ export function artistDetail (id) {
   const url = `/artists?id=${id}`
   return get(url)
 }
+export function toplistDetail () {
+  const url = `/toplist/detail`
+  return get(url)
+}
