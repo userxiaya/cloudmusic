@@ -1,7 +1,7 @@
 // import axios from 'axios'
 import fetch from './fetch'
 let get = function (url) {
-  const qz = 'http://47.107.134.246:3000'
+  const qz = '/apis'
   // const qz = process.env.NODE_ENV === 'production' ? 'http://47.107.134.246:3000' : '/apis'
   return fetch({
     method: 'get',
