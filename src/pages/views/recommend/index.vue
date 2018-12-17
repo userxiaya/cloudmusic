@@ -184,6 +184,18 @@ export default {
     }
   },
   mounted () {
+    const dataRefashDate = localStorage.getItem('dataRefashDate')
+    const now = new Date()
+    const data = localStorage.getItem('indexPageData')
+    if (data) {
+      const indexPageData = data ? JSON.parse(data) : {}
+      this.bannerList = indexPageData.banner
+      this.personalizedList = indexPageData.personalized
+      this.newSongList = indexPageData.newSong
+    }
+    if (dataRefashDate === `${now.getFullYear()}` + `${now.getMonth() + 1}` + `${now.getDate()}`) {
+      return
+    }
     this.getBannerList()
     if (this.$store.state.checkLogin) {
       this.getPersonalized(this.$store.state.loginState)
@@ -213,6 +225,14 @@ export default {
         }
       }
       return list
+    },
+    indexPageData () {
+      // const now = new Date()
+      return {
+        banner: this.bannerList,
+        personalized: this.personalizedList,
+        newSong: this.newSongList
+      }
     }
   },
   directives: {
@@ -231,6 +251,14 @@ export default {
     '$store.state.loginState' () {
       this.getPersonalized(this.$store.state.loginState)
       this.getNewsong(this.$store.state.loginState)
+    },
+    'indexPageData' (val) {
+      if (val.banner && val.banner.length > 0 && val.personalized && val.personalized.length > 0 && val.newSong && val.newSong.length > 0) {
+        const now = new Date()
+        const dataRefashDate = `${now.getFullYear()}` + `${now.getMonth() + 1}` + `${now.getDate()}`
+        localStorage.setItem('dataRefashDate', dataRefashDate)
+        localStorage.setItem('indexPageData', JSON.stringify(val))
+      }
     }
   },
   activated () {

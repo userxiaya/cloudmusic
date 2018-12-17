@@ -92,8 +92,10 @@ export default {
       setMusicList: 'SET_MUSICLIST',
       setCurrentIndex: 'SET_CURRENTINDEX'
     }),
-    getPlayList (uid) {
-      this.listLoading = true
+    getPlayList (uid, timeFlag) {
+      if (timeFlag !== true) {
+        this.listLoading = true
+      }
       userPlaylist(uid)
         .then(res => {
           const data = res.data
@@ -160,12 +162,28 @@ export default {
   },
   watch: {
     '$store.state.userId' (val) {
-      if (val && this.subList.length === 0) {
+      const createList = JSON.parse(localStorage.getItem('my_message.createList')) || []
+      const subList = JSON.parse(localStorage.getItem('my_message.subList')) || []
+      if (val) {
+        if (createList.length > 0 && subList.length > 0) {
+          this.createList = createList
+          this.subList = subList
+          setTimeout(() => {
+            this.getPlayList(this.$store.state.userId, true)
+          }, 1000)
+          return
+        }
         this.getPlayList(val)
       } else {
         this.createList = []
         this.subList = []
       }
+    },
+    'createList' (val) {
+      localStorage.setItem('my_message.createList', JSON.stringify(val))
+    },
+    'subList' (val) {
+      localStorage.setItem('my_message.subList', JSON.stringify(val))
     }
   },
   mounted () {
@@ -183,6 +201,16 @@ export default {
       )
     }
     if (this.$store.state.userId) {
+      const createList = JSON.parse(localStorage.getItem('my_message.createList')) || []
+      const subList = JSON.parse(localStorage.getItem('my_message.subList')) || []
+      if (createList.length > 0 && subList.length > 0) {
+        this.createList = createList
+        this.subList = subList
+        setTimeout(() => {
+          this.getPlayList(this.$store.state.userId, true)
+        }, 1000)
+        return
+      }
       this.getPlayList(this.$store.state.userId)
     }
   },
