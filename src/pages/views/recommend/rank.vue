@@ -9,7 +9,7 @@
                 </div>
                 <ul class="songlist">
                   <li class="song" v-for="(str, index) in item.detail" :key="index+'_'+item.id">
-                    <span>{{index}}.</span>
+                    <span>{{index+1}}.</span>
                     <span>{{str}}</span>
                   </li>
                 </ul>
