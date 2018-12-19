@@ -1,375 +1,358 @@
 {
-	"@platforms": [
-		"android",
-		"iPhone",
-		"iPad"
-	],
-	"id": "H5C6EC5AF",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "cloudmusic",/*应用名称，程序桌面图标名称*/
-	"version": {
-		"name": "1.0",/*应用版本名称*/
-		"code": ""
-	},
-	"description": "",/*应用描述信息*/
-	"icons": {
-		"72": "icon.png"
-	},
-	"launch_path": "app.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
-	"developer": {
-		"name": "",/*开发者名称*/
-		"email": "",/*开发者邮箱地址*/
-		"url": ""
-	},
-	"permissions": {
+    "@platforms" : [ "android", "iPhone", "iPad" ],
+    "id" : "H5C6EC5AF", /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name" : "cloudmusic", /*应用名称，程序桌面图标名称*/
+    "version" : {
+        "name" : "2.0", /*应用版本名称*/
+        "code" : ""
+    },
+    "description" : "", /*应用描述信息*/
+    "icons" : {
+        "72" : "icon.png"
+    },
+    "launch_path" : "app.html", /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "developer" : {
+        "name" : "", /*开发者名称*/
+        "email" : "", /*开发者邮箱地址*/
+        "url" : ""
+    },
+    "permissions" : {
+        "Cache" : {
+            "description" : "管理应用缓存"
+        },
+        "Console" : {
+            "description" : "跟踪调试输出日志"
+        },
+        "Events" : {
+            "description" : "应用扩展事件"
+        }
+    },
+    "plus" : {
+        "statusbar" : {
+            "immersed" : true
+        },
+        "splashscreen" : {
+            "autoclose" : true, /*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+            "waiting" : true,
+            "delay" : "0"
+        },
+        "popGesture" : "close", /*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+        "runmode" : "normal", /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+        "signature" : "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==", /*可选，保留给应用签名，暂不使用*/
+        "distribute" : {
+            "apple" : {
+                "appid" : "", /*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+                "mobileprovision" : "", /*iOS应用打包配置文件*/
+                "password" : "", /*iOS应用打包个人证书导入密码*/
+                "p12" : "", /*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+                "devices" : "universal", /*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+                "frameworks" : []
+            },
+            "google" : {
+                "packagename" : "", /*Android应用包名，如io.dcloud.HelloH5*/
+                "keystore" : "", /*Android应用打包使用的密���库文件*/
+                "password" : "", /*Android应用打包使用密钥库中证书的密码*/
+                "aliasname" : "", /*Android应用打包使用密钥库中证书的别名*/
+                "permissions" : [
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>"
+                ]
+            },
+            "orientation" : [ "portrait-primary", "landscape-primary" ], /*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+            "icons" : {
+                "ios" : {
+                    "prerendered" : true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
 
-		"Cache": {
-			"description": "管理应用缓存"
-		},
-		"Console": {
-			"description": "跟踪调试输出日志"
-		},
+                    /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+                    "iphone" : {
+                        "normal" : "", /*iPhone3/3GS程序图标，分辨率：57x57*/
+                        "retina" : "", /*iPhone4程序图标，分辨率：114x114*/
 
-		"Events": {
-			"description": "应用扩展事件"
-		}
-	},
-	"plus": {
-		"statusbar": {
-			"immersed": true
-		},
-		"splashscreen": {
-			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true,
-			"delay": "0"
-		},
-		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
-		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
-		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {
-			"apple": {
-				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
-				"mobileprovision": "",/*iOS应用打包配置文件*/
-				"password": "",/*iOS应用打包个人证书导入密码*/
-				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
-				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
-			},
-			"google": {
-				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
-				"keystore": "",/*Android应用打包使用的密���库文件*/
-				"password": "",/*Android应用打包使用密钥库中证书的密码*/
-				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": [
-					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
-					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
-					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-					"<uses-feature android:name=\"android.hardware.camera\"/>",
-					"<uses-permission android:name=\"android.permission.CAMERA\"/>"
-				]
-			},
-			"orientation": [
-				"portrait-primary",
-				"landscape-primary"
-			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
-			"icons": {
-				"ios": {
-					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
-					/*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
-					"iphone": {
-						"normal": "", /*iPhone3/3GS程序图标，分辨率：57x57*/
-						"retina": "", /*iPhone4程序图标，分辨率：114x114*/
-						/*iPhone4S/5/6程序图标，分辨率：120x120*/
-						/*iPhone6 Plus程序图标，分辨率：180x180*/
-						"spotlight-normal": "", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
-						"spotlight-retina": "", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
-						/*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "", /*iPhone4设置页面程序图标，分辨率：29x29*/
-						/*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
-						"app@2x": "unpackage/res/icons/120x120.png",
-						"app@3x": "unpackage/res/icons/180x180.png",
-						"settings@3x": "unpackage/res/icons/87x87.png",
-						"settings@2x": "unpackage/res/icons/58x58.png",
-						"spotlight@2x": "unpackage/res/icons/80x80.png",
-						"spotlight@3x": "unpackage/res/icons/120x120.png",
-						"notification@3x": "unpackage/res/icons/60x60.png",
-						"notification@2x": "unpackage/res/icons/40x40.png"
-					},
-					"ipad": {
-						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
-						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
-						/*iPad iOS7程序图标，分辨率：76x76*/
-						/*iPad iOS7高分屏程序图标，分辨率：152x152*/
-						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
-						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
-						/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
-						/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						/*iPad设置页面程序图标，分辨率：29x29*/
-						"app": "unpackage/res/icons/76x76.png",
-						"app@2x": "unpackage/res/icons/152x152.png",
-						"settings": "unpackage/res/icons/29x29.png",
-						"proapp@2x": "unpackage/res/icons/167x167.png",
-						"spotlight": "unpackage/res/icons/40x40.png",
-						"settings@2x": "unpackage/res/icons/58x58.png",
-						"spotlight@2x": "unpackage/res/icons/80x80.png",
-						"notification": "unpackage/res/icons/20x20.png",
-						"notification@2x": "unpackage/res/icons/40x40.png"
-					},
-					"appstore": "unpackage/res/icons/1024x1024.png"
-				},
-				"android": {
-					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
-					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
-					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
-					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": "unpackage/res/icons/144x144.png",
-					"xxxhdpi": "unpackage/res/icons/192x192.png"
-				}
-			},
-			"splashscreen": {
-				"ios": {
-					"iphone": {
-						"default": ""
-					},
-					"ipad": {
-						 /*iPad竖屏启动图片，分辨率：768x1004*/
-						/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						 /*iPad横屏启动图片，分辨率：1024x748*/
-						 /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						 /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						 /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						
-					}
-				},
-				"android": {
-					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": ""
-				}
-			}
-		}
-	},
-	"dependencies": {
-	  "pages": {
-	    "dist/index.html": {
-	      "href": "dist/index.html",
-	      "priority": 0,
-	      "resources": [
-	        "dist/static/js/vendor.66fd84d79c4164e36401.js",
-	        "dist/static/js/vendor.727fea52bc8507ca99ba.js",
-	        "dist/static/js/vendor.5125e5dba6cd27ea1add.js",
-	        "dist/static/js/app.2d79b559d1981c4f0b78.js",
-	        "dist/static/js/manifest.d319374b9452be6ceeaa.js",
-	        "dist/static/css/app.7f5b759bde7dac5d353cacd7744d7a7c.css",
-	        "dist/static/js/vendor.9bf043f815e57af0e7b8.js"
-	      ],
-	      "refer": []
-	    },
-	    "test.html": {
-	      "href": "test.html",
-	      "priority": 0
-	    },
-	    "app.html": {
-	      "href": "app.html",
-	      "resources": [],
-	      "refer": [
-	        "dist/index.html"
-	      ],
-	      "priority": 0
-	    }
-	  },
-	  "idle": {
-	    "resources": [
-	      "dist/static/js/manifest.b5c938cd77cac5aa8b82.js.map",
-	      "dist/static/js/7.b577501d3cdbbcc147a3.js.map",
-	      "dist/static/swiper/js/swiper.min.js",
-	      "src/components/vue-awesome-swiper/swiper.vue",
-	      "dist/static/js/1.ce667212bd9b4dc725ea.js.map",
-	      "src/store/mutation-types.js",
-	      "dist/static/css/app.a921bfdc7efcacf9401e47c5889402e2.css.map",
-	      "src/components/vue-awesome-swiper/slide.vue",
-	      "package.json",
-	      "src/base/lrcParser.js",
-	      "src/components/searchList.vue",
-	      "src/assets/iconfont.svg",
-	      "config/dev.env.js",
-	      "package-lock.json",
-	      "README.md",
-	      "dist/static/js/8.8bcbb3d2049003522b85.js",
-	      "dist/static/js/1.ce667212bd9b4dc725ea.js",
-	      "src/pages/viewsPage.vue",
-	      "src/assets/iconfont.woff",
-	      "dist/static/swiper/css/swiper.css",
-	      "src/components/musicBoxComponent/bottom.vue",
-	      "dist/static/js/7.b577501d3cdbbcc147a3.js",
-	      "build/webpack.dev.conf.js",
-	      "index.html",
-	      "dist/static/js/0.3216e33e052cb5b0aaec.js",
-	      "dist/static/swiper/js/swiper.esm.js",
-	      "src/store/mutations.js",
-	      "src/components/loading.vue",
-	      "dist/static/swiper/js/swiper.js",
-	      "src/main.js",
-	      "src/pages/views/recommend/rank.vue",
-	      "dist/static/swiper/js/swiper.esm.bundle.js",
-	      "static/swiper/js/swiper.esm.js",
-	      "src/components/vue-awesome-swiper/index.js",
-	      "config/index.js",
-	      "src/pages/phoneLogin.vue",
-	      "src/base/audio.js",
-	      "static/swiper/css/swiper.min.css",
-	      "dist/static/loading.gif",
-	      "build/logo.png",
-	      "src/assets/loading.gif",
-	      "src/common/scss/index.scss",
-	      "src/components/musicBoxComponent/lrc.vue",
-	      "dist/static/css/app.a921bfdc7efcacf9401e47c5889402e2.css",
-	      "src/components/header.vue",
-	      "dist/static/js/4.7b88e214a0e5da5d1651.js",
-	      "static/default.png",
-	      "src/App.vue",
-	      "dist/static/js/6.99e23006146a497b1a20.js.map",
-	      "dist/static/img/iconfont.f8c690f.svg",
-	      "config/prod.env.js",
-	      "build/webpack.base.conf.js",
-	      "src/pages/views/myMessage.vue",
-	      "src/components/songList.vue",
-	      "src/store/getters.js",
-	      "src/base/vue-tap.js",
-	      "dist/static/js/9.3401b89ab5ec370cc642.js.map",
-	      "src/components/scroll.vue",
-	      "dist/static/js/app.2fdfe13a66ea1bcea9c0.js.map",
-	      "src/pages/views/recommend/singer.vue",
-	      "src/assets/default.png",
-	      "dist/static/default.png",
-	      "dist/static/js/0.3216e33e052cb5b0aaec.js.map",
-	      "dist/static/js/3.d02112ea7f6fc3c790dc.js.map",
-	      "src/components/minplayer.vue",
-	      "dist/static/js/8.8bcbb3d2049003522b85.js.map",
-	      "dist/static/js/vendor.9bf043f815e57af0e7b8.js.map",
-	      "src/components/playlist.vue",
-	      "static/swiper/js/swiper.esm.bundle.js",
-	      "dist/static/js/5.5e6e53e6a4199f7df999.js",
-	      "src/store/index.js",
-	      "dist/static/js/2.52fbde5ffdcda94facf1.js",
-	      "src/pages/views/index.vue",
-	      "static/swiper/css/swiper.css",
-	      "build/check-versions.js",
-	      "src/pages/singerDetail.vue",
-	      "config/proxyConfig.js",
-	      "src/pages/views/recommend/index.vue",
-	      "dist/static/js/4.7b88e214a0e5da5d1651.js.map",
-	      "static/swiper/js/swiper.min.js",
-	      "src/base/initObj.js",
-	      "src/pages/playBox.vue",
-	      "src/components/slide.vue",
-	      "dist/static/js/2.52fbde5ffdcda94facf1.js.map",
-	      "src/pages/songDetail.vue",
-	      "static/swiper/js/swiper.js",
-	      "src/components/musicBox.vue",
-	      "src/pages/views/search.vue",
-	      "src/pages/views/recommend.vue",
-	      "src/assets/iconfont.eot",
-	      "static/loading.gif",
-	      "static/swiper/js/swiper.min.js.map",
-	      "src/common/js/dom.js",
-	      "src/components/progress-circle.vue",
-	      "dist/static/swiper/css/swiper.min.css",
-	      "src/base/api.js",
-	      "src/components/vue-awesome-swiper/ssr.js",
-	      "src/assets/iconfont.ttf",
-	      "build/utils.js",
-	      "dist/static/js/3.d02112ea7f6fc3c790dc.js",
-	      "dist/static/js/9.3401b89ab5ec370cc642.js",
-	      "dist/static/js/5.5e6e53e6a4199f7df999.js.map",
-	      "src/router/index.js",
-	      "src/base/song.js",
-	      "dist/static/js/6.99e23006146a497b1a20.js",
-	      "src/components/musicBoxComponent/circle.vue",
-	      "build/vue-loader.conf.js",
-	      "src/store/state.js",
-	      "src/common/scss/icon.scss",
-	      "dist/static/js/app.2fdfe13a66ea1bcea9c0.js",
-	      "build/build.js",
-	      "src/components/musicBoxComponent/playBar.vue",
-	      "dist/static/js/manifest.b5c938cd77cac5aa8b82.js",
-	      "src/base/fetch.js",
-	      "src/components/listview.vue",
-	      "dist/static/swiper/js/swiper.min.js.map",
-	      "build/webpack.prod.conf.js"
-	    ]
-	  }
-	},
-	"unpackage": [
-		"build/build.js",
-		"build/check-versions.js",
-		"build/logo.png",
-		"build/utils.js",
-		"build/vue-loader.conf.js",
-		"build/webpack.base.conf.js",
-		"build/webpack.dev.conf.js",
-		"build/webpack.prod.conf.js",
-		"config/dev.env.js",
-		"config/index.js",
-		"config/prod.env.js",
-		"config/proxyConfig.js",
-		"src/App.vue",
-		"src/assets/default.png",
-		"src/assets/iconfont.eot",
-		"src/assets/iconfont.svg",
-		"src/assets/iconfont.ttf",
-		"src/assets/iconfont.woff",
-		"src/assets/loading.gif",
-		"src/base/api.js",
-		"src/base/audio.js",
-		"src/base/fetch.js",
-		"src/base/initObj.js",
-		"src/base/lrcParser.js",
-		"src/base/song.js",
-		"src/common/js/dom.js",
-		"src/common/scss/icon.scss",
-		"src/common/scss/index.scss",
-		"src/components/header.vue",
-		"src/components/listview.vue",
-		"src/components/loading.vue",
-		"src/components/minplayer.vue",
-		"src/components/musicBox.vue",
-		"src/components/musicBoxComponent/bottom.vue",
-		"src/components/musicBoxComponent/circle.vue",
-		"src/components/musicBoxComponent/lrc.vue",
-		"src/components/musicBoxComponent/playBar.vue",
-		"src/components/progress-circle.vue",
-		"src/components/scroll.vue",
-		"src/components/searchList.vue",
-		"src/components/songList.vue",
-		"src/main.js",
-		"src/pages/phoneLogin.vue",
-		"src/pages/playBox.vue",
-		"src/pages/singerDetail.vue",
-		"src/pages/songDetail.vue",
-		"src/pages/views/index.vue",
-		"src/pages/views/myMessage.vue",
-		"src/pages/views/recommend/index.vue",
-		"src/pages/views/recommend/rank.vue",
-		"src/pages/views/recommend/singer.vue",
-		"src/pages/views/recommend.vue",
-		"src/pages/views/search.vue",
-		"src/pages/viewsPage.vue",
-		"src/router/index.js",
-		"src/store/getters.js",
-		"src/store/index.js",
-		"src/store/mutation-types.js",
-		"src/store/mutations.js",
-		"src/store/state.js",
-		"static/default.png",
-		"README.md",
-		"index.html",
-		"package-lock.json",
-		"package.json",
-		"src/base/vue-tap.js",
-		"static/loading.gif"
-	],
-	"fullscreen": false
+                        /*iPhone4S/5/6程序图标，分辨率：120x120*//*iPhone6 Plus程序图标，分辨率：180x180*/
+                        "spotlight-normal" : "", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+                        "spotlight-retina" : "", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+
+                        /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+                        "settings-normal" : "", /*iPhone4设置页面程序图标，分辨率：29x29*/
+
+                        /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png"
+                    },
+                    "ipad" : {
+                        "normal" : "", /*iPad普通屏幕程序图标，分辨率：72x72*/
+                        "retina" : "", /*iPad高分屏程序图标，分辨率：144x144*/
+
+                        /*iPad iOS7程序图标，分辨率：76x76*//*iPad iOS7高分屏程序图标，分辨率：152x152*/
+                        "spotlight-normal" : "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+                        "spotlight-retina" : "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+
+                        /*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*//*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*//*iPad设置页面程序图标，分辨率：29x29*/
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png"
+                    },
+                    "appstore" : "unpackage/res/icons/1024x1024.png"
+                },
+                "android" : {
+                    "mdpi" : "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+                    "ldpi" : "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+                    "hdpi" : "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi" : "unpackage/res/icons/96x96.png", /*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                }
+            },
+            "splashscreen" : {
+                "ios" : {
+                    "iphone" : {
+                        "default" : ""
+                    },
+                    "ipad" : {}
+                },
+                /*iPad竖屏启动图片，分辨率：768x1004*//*iPad高分屏竖屏图片，分辨率：1536x2008*//*iPad横屏启动图片，分辨率：1024x748*//*iPad高分屏横屏启动图片，分辨率：2048x1496*//*iPad iOS7竖屏启动图片，分辨率：768x1024*//*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*//*iPad iOS7横屏启动图片，分辨率：1024x768*/
+                "android" : {
+                    "mdpi" : "", /*普通屏启动图片，分辨率：240x282*/
+                    "ldpi" : ""
+                }
+            }
+        }
+    },
+    "dependencies" : {
+        "pages" : {
+            "dist/index.html" : {
+                "href" : "dist/index.html",
+                "priority" : 0,
+                "resources" : [
+                    "dist/static/js/vendor.66fd84d79c4164e36401.js",
+                    "dist/static/js/vendor.727fea52bc8507ca99ba.js",
+                    "dist/static/js/vendor.5125e5dba6cd27ea1add.js",
+                    "dist/static/js/app.2d79b559d1981c4f0b78.js",
+                    "dist/static/js/manifest.d319374b9452be6ceeaa.js",
+                    "dist/static/css/app.7f5b759bde7dac5d353cacd7744d7a7c.css",
+                    "dist/static/js/vendor.9bf043f815e57af0e7b8.js"
+                ],
+                "refer" : []
+            },
+            "test.html" : {
+                "href" : "test.html",
+                "priority" : 0
+            },
+            "app.html" : {
+                "href" : "app.html",
+                "resources" : [],
+                "refer" : [ "dist/index.html" ],
+                "priority" : 0
+            }
+        },
+        "idle" : {
+            "resources" : [
+                "dist/static/js/manifest.b5c938cd77cac5aa8b82.js.map",
+                "dist/static/js/7.b577501d3cdbbcc147a3.js.map",
+                "dist/static/swiper/js/swiper.min.js",
+                "src/components/vue-awesome-swiper/swiper.vue",
+                "dist/static/js/1.ce667212bd9b4dc725ea.js.map",
+                "src/store/mutation-types.js",
+                "dist/static/css/app.a921bfdc7efcacf9401e47c5889402e2.css.map",
+                "src/components/vue-awesome-swiper/slide.vue",
+                "package.json",
+                "src/base/lrcParser.js",
+                "src/components/searchList.vue",
+                "src/assets/iconfont.svg",
+                "config/dev.env.js",
+                "package-lock.json",
+                "README.md",
+                "dist/static/js/8.8bcbb3d2049003522b85.js",
+                "dist/static/js/1.ce667212bd9b4dc725ea.js",
+                "src/pages/viewsPage.vue",
+                "src/assets/iconfont.woff",
+                "dist/static/swiper/css/swiper.css",
+                "src/components/musicBoxComponent/bottom.vue",
+                "dist/static/js/7.b577501d3cdbbcc147a3.js",
+                "build/webpack.dev.conf.js",
+                "index.html",
+                "dist/static/js/0.3216e33e052cb5b0aaec.js",
+                "dist/static/swiper/js/swiper.esm.js",
+                "src/store/mutations.js",
+                "src/components/loading.vue",
+                "dist/static/swiper/js/swiper.js",
+                "src/main.js",
+                "src/pages/views/recommend/rank.vue",
+                "dist/static/swiper/js/swiper.esm.bundle.js",
+                "static/swiper/js/swiper.esm.js",
+                "src/components/vue-awesome-swiper/index.js",
+                "config/index.js",
+                "src/pages/phoneLogin.vue",
+                "src/base/audio.js",
+                "static/swiper/css/swiper.min.css",
+                "dist/static/loading.gif",
+                "build/logo.png",
+                "src/assets/loading.gif",
+                "src/common/scss/index.scss",
+                "src/components/musicBoxComponent/lrc.vue",
+                "dist/static/css/app.a921bfdc7efcacf9401e47c5889402e2.css",
+                "src/components/header.vue",
+                "dist/static/js/4.7b88e214a0e5da5d1651.js",
+                "static/default.png",
+                "src/App.vue",
+                "dist/static/js/6.99e23006146a497b1a20.js.map",
+                "dist/static/img/iconfont.f8c690f.svg",
+                "config/prod.env.js",
+                "build/webpack.base.conf.js",
+                "src/pages/views/myMessage.vue",
+                "src/components/songList.vue",
+                "src/store/getters.js",
+                "src/base/vue-tap.js",
+                "dist/static/js/9.3401b89ab5ec370cc642.js.map",
+                "src/components/scroll.vue",
+                "dist/static/js/app.2fdfe13a66ea1bcea9c0.js.map",
+                "src/pages/views/recommend/singer.vue",
+                "src/assets/default.png",
+                "dist/static/default.png",
+                "dist/static/js/0.3216e33e052cb5b0aaec.js.map",
+                "dist/static/js/3.d02112ea7f6fc3c790dc.js.map",
+                "src/components/minplayer.vue",
+                "dist/static/js/8.8bcbb3d2049003522b85.js.map",
+                "dist/static/js/vendor.9bf043f815e57af0e7b8.js.map",
+                "src/components/playlist.vue",
+                "static/swiper/js/swiper.esm.bundle.js",
+                "dist/static/js/5.5e6e53e6a4199f7df999.js",
+                "src/store/index.js",
+                "dist/static/js/2.52fbde5ffdcda94facf1.js",
+                "src/pages/views/index.vue",
+                "static/swiper/css/swiper.css",
+                "build/check-versions.js",
+                "src/pages/singerDetail.vue",
+                "config/proxyConfig.js",
+                "src/pages/views/recommend/index.vue",
+                "dist/static/js/4.7b88e214a0e5da5d1651.js.map",
+                "static/swiper/js/swiper.min.js",
+                "src/base/initObj.js",
+                "src/pages/playBox.vue",
+                "src/components/slide.vue",
+                "dist/static/js/2.52fbde5ffdcda94facf1.js.map",
+                "src/pages/songDetail.vue",
+                "static/swiper/js/swiper.js",
+                "src/components/musicBox.vue",
+                "src/pages/views/search.vue",
+                "src/pages/views/recommend.vue",
+                "src/assets/iconfont.eot",
+                "static/loading.gif",
+                "static/swiper/js/swiper.min.js.map",
+                "src/common/js/dom.js",
+                "src/components/progress-circle.vue",
+                "dist/static/swiper/css/swiper.min.css",
+                "src/base/api.js",
+                "src/components/vue-awesome-swiper/ssr.js",
+                "src/assets/iconfont.ttf",
+                "build/utils.js",
+                "dist/static/js/3.d02112ea7f6fc3c790dc.js",
+                "dist/static/js/9.3401b89ab5ec370cc642.js",
+                "dist/static/js/5.5e6e53e6a4199f7df999.js.map",
+                "src/router/index.js",
+                "src/base/song.js",
+                "dist/static/js/6.99e23006146a497b1a20.js",
+                "src/components/musicBoxComponent/circle.vue",
+                "build/vue-loader.conf.js",
+                "src/store/state.js",
+                "src/common/scss/icon.scss",
+                "dist/static/js/app.2fdfe13a66ea1bcea9c0.js",
+                "build/build.js",
+                "src/components/musicBoxComponent/playBar.vue",
+                "dist/static/js/manifest.b5c938cd77cac5aa8b82.js",
+                "src/base/fetch.js",
+                "src/components/listview.vue",
+                "dist/static/swiper/js/swiper.min.js.map",
+                "build/webpack.prod.conf.js"
+            ]
+        }
+    },
+    "unpackage" : [
+        "build/build.js",
+        "build/check-versions.js",
+        "build/logo.png",
+        "build/utils.js",
+        "build/vue-loader.conf.js",
+        "build/webpack.base.conf.js",
+        "build/webpack.dev.conf.js",
+        "build/webpack.prod.conf.js",
+        "config/dev.env.js",
+        "config/index.js",
+        "config/prod.env.js",
+        "config/proxyConfig.js",
+        "src/App.vue",
+        "src/assets/default.png",
+        "src/assets/iconfont.eot",
+        "src/assets/iconfont.svg",
+        "src/assets/iconfont.ttf",
+        "src/assets/iconfont.woff",
+        "src/assets/loading.gif",
+        "src/base/api.js",
+        "src/base/audio.js",
+        "src/base/fetch.js",
+        "src/base/initObj.js",
+        "src/base/lrcParser.js",
+        "src/base/song.js",
+        "src/common/js/dom.js",
+        "src/common/scss/icon.scss",
+        "src/common/scss/index.scss",
+        "src/components/header.vue",
+        "src/components/listview.vue",
+        "src/components/loading.vue",
+        "src/components/minplayer.vue",
+        "src/components/musicBox.vue",
+        "src/components/musicBoxComponent/bottom.vue",
+        "src/components/musicBoxComponent/circle.vue",
+        "src/components/musicBoxComponent/lrc.vue",
+        "src/components/musicBoxComponent/playBar.vue",
+        "src/components/progress-circle.vue",
+        "src/components/scroll.vue",
+        "src/components/searchList.vue",
+        "src/components/songList.vue",
+        "src/main.js",
+        "src/pages/phoneLogin.vue",
+        "src/pages/playBox.vue",
+        "src/pages/singerDetail.vue",
+        "src/pages/songDetail.vue",
+        "src/pages/views/index.vue",
+        "src/pages/views/myMessage.vue",
+        "src/pages/views/recommend/index.vue",
+        "src/pages/views/recommend/rank.vue",
+        "src/pages/views/recommend/singer.vue",
+        "src/pages/views/recommend.vue",
+        "src/pages/views/search.vue",
+        "src/pages/viewsPage.vue",
+        "src/router/index.js",
+        "src/store/getters.js",
+        "src/store/index.js",
+        "src/store/mutation-types.js",
+        "src/store/mutations.js",
+        "src/store/state.js",
+        "static/default.png",
+        "README.md",
+        "index.html",
+        "package-lock.json",
+        "package.json",
+        "src/base/vue-tap.js",
+        "static/loading.gif"
+    ],
+    "fullscreen" : false
 }
