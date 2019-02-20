@@ -122,7 +122,7 @@ export default {
       this.newSongList = indexPageData.newSong
     }
     if (dataRefashDate === `${now.getFullYear()}` + `${now.getMonth() + 1}` + `${now.getDate()}`) {
-      // return
+      return
     }
     this.getData()
     if (window.plus) {
@@ -169,8 +169,10 @@ export default {
   },
   watch: {
     '$store.state.checkLogin' () {
+      this.getData()
     },
     '$store.state.loginState' () {
+      this.getData()
     },
     'indexPageData' (val) {
       if (val.banner && val.banner.length > 0 && val.personalized && val.personalized.length > 0 && val.newSong && val.newSong.length > 0) {
