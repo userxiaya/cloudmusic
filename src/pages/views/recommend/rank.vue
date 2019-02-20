@@ -42,10 +42,14 @@ export default {
       toplistDetail().then((res) => {
         const data = (res.status + '' === '200' && res.data && res.data.code + '' === '200') ? res.data : null
         let list = data ? data.list || [] : []
-        list = list.map(item => {
+        let list1 = list.filter(function (e) {
+          const type = typeof (e.ToplistType)
+          return type === 'string'
+        })
+        list1 = list1.map(item => {
           return createSongDetail(item)
         })
-        this.topList = list
+        this.topList = list1
       })
     },
     goToDetail (li) {

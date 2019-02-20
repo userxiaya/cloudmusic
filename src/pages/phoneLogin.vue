@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { login, loginRefresh } from '@/base/api'
+import { login } from '@/base/api'
 import mHeader from '@/components/header'
 import { Indicator } from 'mint-ui'
 export default {
@@ -38,15 +38,10 @@ export default {
         login(this.phone, this.password).then(res => {
           Indicator.close()
           if (res.data.code + '' === '200') {
-            loginRefresh().then(res => {
-              const code = res.data.code + ''
-              if (code === '200' || code === '400') {
-                this.$router.go(-1)
-                setTimeout(() => {
-                  this.$store.state.loginState = true
-                }, 2000)
-              }
-            })
+            this.$router.go(-1)
+            setTimeout(() => {
+              this.$store.state.loginState = true
+            }, 2000)
           } else {
             if (res.data.msg) {
               this.toast(res.data.msg)

@@ -1,13 +1,28 @@
 // import axios from 'axios'
 import fetch from './fetch'
 let get = function (url) {
-  const qz = '/apis'
+  const qz = 'http://47.107.134.246:3000'
   // const qz = process.env.NODE_ENV === 'production' ? 'http://47.107.134.246:3000' : '/apis'
   return fetch({
     method: 'get',
     url: `${qz + url}`
   })
   // return axios.get(`${qz + url}`)
+}
+let getPageApi = function (url) {
+  const qz = 'http://47.107.134.246:8082'
+  return fetch({
+    method: 'get',
+    url: `${qz + url}`
+  })
+}
+export function pageApiLogin (phone, password) {
+  const url = `/recommend?phone=${phone}&password=${password}`
+  return getPageApi(url)
+}
+export function pageApiRecommend () {
+  const url = `/recommend`
+  return getPageApi(url)
 }
 
 export function getSong (id) {
