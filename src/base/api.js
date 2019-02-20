@@ -24,6 +24,10 @@ export function pageApiRecommend () {
   const url = `/recommend`
   return getPageApi(url)
 }
+export function pageApiSongDetail (id) {
+  const url = `/songDetail?id=${id}`
+  return getPageApi(url)
+}
 
 export function getSong (id) {
   // const url = `/song/url?id=${id}`
