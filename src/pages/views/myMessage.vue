@@ -66,7 +66,7 @@
 import loading from '@/components/loading'
 import { mapGetters, mapMutations } from 'vuex'
 import scroll from '@/components/scroll'
-import { userPlaylist, logout } from '@/base/api'
+import { pageApiUserPlaylist, logout } from '@/base/api'
 import { Indicator } from 'mint-ui'
 export default {
   data () {
@@ -96,14 +96,12 @@ export default {
       if (timeFlag !== true) {
         this.listLoading = true
       }
-      userPlaylist(uid)
+      pageApiUserPlaylist(uid)
         .then(res => {
-          const data = res.data
-          if (data && data.code + '' === '200') {
-            const playlist = data.playlist
+          if (res.status + '' === '200') {
+            const playlist = res.data
             if (playlist) {
               playlist.forEach(e => {
-                e.image = e.coverImgUrl
                 e.name =
                   e.userId + '' === uid + '' &&
                   e.name.indexOf(this.$store.state.userName) !== -1

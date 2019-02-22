@@ -28,6 +28,10 @@ export function pageApiSongDetail (id) {
   const url = `/songDetail?id=${id}`
   return getPageApi(url)
 }
+export function pageApiUserPlaylist (uid) {
+  const url = `/userPlaylist?uid=${uid}`
+  return getPageApi(url)
+}
 
 export function getSong (id) {
   // const url = `/song/url?id=${id}`
