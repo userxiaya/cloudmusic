@@ -3,7 +3,7 @@
     <div class="btn_list">
       <div class="like-btn iconfont"></div>
       <div class="pinglun-btn iconfont hasNum">
-        <div class="num">999+</div>
+        <div class="num">{{commentCount|commentCount}}</div>
       </div>
       <div class="more-btn iconfont"></div>
     </div>
@@ -33,6 +33,12 @@ export default {
       type: Number,
       default () {
         return 0
+      }
+    },
+    commentCount: {
+      type: String,
+      default () {
+        return ''
       }
     },
     position: {
@@ -80,6 +86,18 @@ export default {
           lei = 'liebiaoxunhuan'
       }
       return lei
+    }
+  },
+  filters: {
+    commentCount (val) {
+      if (val > 100000) {
+        return '10w+'
+      }
+      if (val > 10000) {
+        return '1w+'
+      } else {
+        return val
+      }
     }
   }
 }

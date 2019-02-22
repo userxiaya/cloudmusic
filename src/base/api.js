@@ -36,6 +36,10 @@ export function pageApiToplistDetail () {
   const url = `/toplistDetail`
   return getPageApi(url)
 }
+export function pageApiCommentMusic (id, limit, offset) {
+  const url = `/commentMusic?id=${id}&limit=${limit || 1}&offset=${offset || 0}`
+  return getPageApi(url)
+}
 
 export function getSong (id) {
   // const url = `/song/url?id=${id}`

@@ -1,19 +1,48 @@
 <template>
   <transition :name="slideName">
     <div class="main">
-      <popup v-model="popupVisible" style="border-radius: 5px; padding-bottom: 30px; padding-top: 10px">
+      <popup
+        v-model="popupVisible"
+        style="border-radius: 5px; padding-bottom: 30px; padding-top: 10px"
+      >
         <h2>请选择要查看的歌手</h2>
-        <scroll :data="currentSong.artistNew" class="singer-box" :stopPropagation="true" :click="true">
+        <scroll
+          :data="currentSong.artistNew"
+          class="singer-box"
+          :stopPropagation="true"
+          :click="true"
+        >
           <div style="width:100%; height:auto">
-            <div v-for="(item,index) in currentSong.artistNew" :key="index" @click.stop="selectSinger(item)">
-              <cell class="cell" :title="item.name">
-                <img style="border-radius:5px; margin-right:20px" slot="icon" v-lazy="item.singerImage" :key="item.singerImage" width="auto" height="60">
+            <div
+              v-for="(item,index) in currentSong.artistNew"
+              :key="index"
+              @click.stop="selectSinger(item)"
+            >
+              <cell
+                class="cell"
+                :title="item.name"
+              >
+                <img
+                  style="border-radius:5px; margin-right:20px"
+                  slot="icon"
+                  v-lazy="item.singerImage"
+                  :key="item.singerImage"
+                  width="auto"
+                  height="60"
+                >
               </cell>
             </div>
           </div>
         </scroll>
       </popup>
-      <musicBox @singerclick="showSinger" v-immersed :currentMusic="currentMusic" @percentChangeEnd="seekTo" :playType="playing?'play':'pause'"></musicBox>
+      <musicBox
+        @singerclick="showSinger"
+        v-immersed
+        :currentMusic="currentMusic"
+        @percentChangeEnd="seekTo"
+        :playType="playing?'play':'pause'"
+        :commentCount="commentCount"
+      ></musicBox>
     </div>
   </transition>
 </template>
@@ -21,7 +50,7 @@
 <script>
 import musicBox from '@/components/musicBox'
 import { mapGetters, mapState } from 'vuex'
-// import { artistDetail } from '@/base/api'
+import { pageApiCommentMusic } from '@/base/api'
 import scroll from '@/components/scroll'
 import { Popup, Cell } from 'mint-ui'
 export default {
@@ -36,7 +65,8 @@ export default {
         name: '',
         artist: []
       },
-      artistList: []
+      artistList: [],
+      commentCount: ''
     }
   },
   components: {
@@ -64,9 +94,13 @@ export default {
       this.slideName = ''
       this.$nextTick(() => {
         this.$bus.emit('player-hide')
-        const params = {id: singer.id, image: singer.singerImage || singer.image, title: singer.name}
+        const params = {
+          id: singer.id,
+          image: singer.singerImage || singer.image,
+          title: singer.name
+        }
         this.$bus.emit('singer-detail-acrive', { params })
-        this.$router.push({name: 'singerDetail', params: params})
+        this.$router.push({ name: 'singerDetail', params: params })
       })
     },
     showSinger () {
@@ -80,11 +114,21 @@ export default {
       } else {
         this.toast('繁忙，请稍后再试')
       }
+    },
+    getCommentMusic (id) {
+      pageApiCommentMusic(id).then(res => {
+        if (res.status + '' === '200' && res.data.code + '' === '200') {
+          const data = res.data
+          this.commentCount = data.total + ''
+        }
+      })
     }
   },
   watch: {
     currentSong: {
       handler (val) {
+        this.commentCount = ''
+        this.getCommentMusic(val.id)
         let currentMusic = this.currentMusic
         for (let key in this.currentMusic) {
           currentMusic[key] = val[key]
@@ -112,7 +156,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-h2{
+h2 {
   margin: 0;
   padding: 0;
   border: 0;
@@ -153,13 +197,13 @@ h2{
 .singer-box {
   max-height: 205px; /*no*/
   height: auto;
-  .cell{
+  .cell {
     width: 280px;
     margin-top: 10px;
-    background-repeat: inherit
+    background-repeat: inherit;
   }
 }
 .singer-box::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 </style>

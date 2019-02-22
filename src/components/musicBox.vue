@@ -1,28 +1,62 @@
 <template>
-  <div class="main" v-show="isMounted">
+  <div
+    class="main"
+    v-show="isMounted"
+  >
     <div class="background">
       <div class="filter"></div>
-      <img width="100%" height="100%" :src="currentMusic.pic">
+      <img
+        width="100%"
+        height="100%"
+        :src="currentMusic.pic"
+      >
     </div>
     <div class="top">
-      <div class="back" @click.stop="back">
+      <div
+        class="back"
+        @click.stop="back"
+      >
         <i class="fa iconfont"></i>
       </div>
       <h1 class="title">{{currentMusic.name}}</h1>
-      <h2 class="subtitle"><span v-for="(item,key) in currentMusic.artist" :key="key" @click.stop="$emit('singerclick')">
+      <h2 class="subtitle"><span
+          v-for="(item,key) in currentMusic.artist"
+          :key="key"
+          @click.stop="$emit('singerclick')"
+        >
           <template v-if="key<currentMusic.artist.length-1">{{item.name}}/</template>
           <template v-else>{{item.name}}</template>
         </span></h2>
     </div>
-    <div class="middle" @click="changeMiddle">
+    <div
+      class="middle"
+      @click="changeMiddle"
+    >
       <transition name="middleL">
-        <circleBox v-if="currentShow === 'cd' && playerShowFlag===true" :picUrl="currentMusic.image||''" class="middlel" :playType="playType"></circleBox>
+        <circleBox
+          v-if="currentShow === 'cd' && playerShowFlag===true"
+          :picUrl="currentMusic.image||''"
+          class="middlel"
+          :playType="playType"
+        ></circleBox>
       </transition>
       <transition name="middleR">
-        <lrc v-if="lrcFlags" v-show="currentShow === 'lyric'" class="middle-r" :lrc="currentShow === 'lyric'&&playerShowFlag===true?lrcData:[]" :nolrc="nolrc" :lryempty="lryempty"></lrc>
+        <lrc
+          v-if="lrcFlags"
+          v-show="currentShow === 'lyric'"
+          class="middle-r"
+          :lrc="currentShow === 'lyric'&&playerShowFlag===true?lrcData:[]"
+          :nolrc="nolrc"
+          :lryempty="lryempty"
+        ></lrc>
       </transition>
     </div>
-    <bottom :duration="playerObj.duration" :position="playerObj.position" @percentChangeEnd="seekTo"></bottom>
+    <bottom
+      :duration="playerObj.duration"
+      :position="playerObj.position"
+      :commentCount="commentCount"
+      @percentChangeEnd="seekTo"
+    ></bottom>
   </div>
 </template>
 
@@ -53,6 +87,12 @@ export default {
       type: String,
       default () {
         return 'pause'
+      }
+    },
+    commentCount: {
+      type: String,
+      default () {
+        return ''
       }
     },
     currentMusic: {
