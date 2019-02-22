@@ -3,7 +3,7 @@
     <div class="main">
       <popup v-model="popupVisible" style="border-radius: 5px; padding-bottom: 30px; padding-top: 10px">
         <h2>请选择要查看的歌手</h2>
-        <scroll :data="currentSong.artistNew" class="singer-box" :stopPropagation="true">
+        <scroll :data="currentSong.artistNew" class="singer-box" :stopPropagation="true" :click="true">
           <div style="width:100%; height:auto">
             <div v-for="(item,index) in currentSong.artistNew" :key="index" @click.stop="selectSinger(item)">
               <cell class="cell" :title="item.name">
@@ -64,7 +64,7 @@ export default {
       this.slideName = ''
       this.$nextTick(() => {
         this.$bus.emit('player-hide')
-        const params = {id: singer.id, image: singer.singerImage, title: singer.name}
+        const params = {id: singer.id, image: singer.singerImage || singer.image, title: singer.name}
         this.$bus.emit('singer-detail-acrive', { params })
         this.$router.push({name: 'singerDetail', params: params})
       })
