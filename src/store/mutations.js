@@ -31,7 +31,7 @@ const getSingerUrl = function (id) {
     artistDetail(id).then((res) => {
       const data = res.data
       if (data && `${data.code}` === '200') {
-        resolve(data.artist.picUrl)
+        resolve(data.artist.picUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp'))
       } else {
         resolve('')
       }
@@ -45,7 +45,7 @@ const getSongImage = function (id) {
     songDetail(id).then((res) => {
       const result = res.data
       if (result.songs && result.songs[0] && result.songs[0].al.picUrl) {
-        resolve(result.songs[0].al.picUrl)
+        resolve(result.songs[0].al.picUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp'))
       } else {
         resolve('')
       }

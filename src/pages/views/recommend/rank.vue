@@ -22,8 +22,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import scroll from '@/components/scroll'
-import {toplistDetail} from '@/base/api'
-import {createSongDetail} from '@/base/songTop'
+import {pageApiToplistDetail} from '@/base/api'
 export default {
   data () {
     return {
@@ -39,15 +38,10 @@ export default {
   },
   methods: {
     getTopList () {
-      toplistDetail().then((res) => {
-        const data = (res.status + '' === '200' && res.data && res.data.code + '' === '200') ? res.data : null
-        let list = data ? data.list || [] : []
-        let list1 = list.filter(function (e) {
-          const type = typeof (e.ToplistType)
-          return type === 'string'
-        })
-        list1 = list1.map(item => {
-          return createSongDetail(item)
+      pageApiToplistDetail().then((res) => {
+        const data = (res.status + '' === '200') ? res.data : null
+        let list1 = data.filter(function (e) {
+          return e.detail.length > 0
         })
         this.topList = list1
       })
