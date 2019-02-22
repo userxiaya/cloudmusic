@@ -3,8 +3,8 @@
         <div class="suggest">
             <div class="search-suggest" v-if="!searchShow && query && songs.length > 0">
                 <p class="title">最佳匹配</p>
-                <div class="search-suggest-item"  @click.stop="singerDetail(suggest.artists[0])" v-if="suggest.artists&&suggest.artists[0]"><img v-lazy="suggest.artists[0].img1v1Url" :key="suggest.artists[0].img1v1Url" width="50" height="50"> <span>歌手：{{suggest.artists[0].name}}</span></div>
-                <div class="search-suggest-item" @click.stop="songDetail(suggest.playlists[0])" v-if="suggest.playlists&&suggest.playlists[0]"><img v-lazy="suggest.playlists[0].coverImgUrl" :key="suggest.playlists[0].coverImgUrl" width="50" height="50">
+                <div class="search-suggest-item"  @click.stop="singerDetail(suggest.artists[0])" v-if="suggest.artists&&suggest.artists[0]"><img v-lazy="suggest.artists[0].img1v1Url.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')" :key="suggest.artists[0].img1v1Url.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')" width="50" height="50"> <span>歌手：{{suggest.artists[0].name}}</span></div>
+                <div class="search-suggest-item" @click.stop="songDetail(suggest.playlists[0])" v-if="suggest.playlists&&suggest.playlists[0]"><img v-lazy="suggest.playlists[0].coverImgUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')" :key="suggest.playlists[0].coverImgUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')" width="50" height="50">
                     <div class="text">
                         <p>歌单：{{suggest.playlists[0].name}}</p>
                         <p class="singer" v-if="suggest.albums&&suggest.albums[0]">{{suggest.albums[0].artist.name}}</p>
@@ -122,14 +122,14 @@ export default {
       })
     },
     songDetail (item) {
-      const param = {id: item.id, image: item.coverImgUrl, title: item.name, playCount: item.playCount, trackCount: item.trackCount}
+      const param = {id: item.id, image: item.coverImgUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp'), title: item.name, playCount: item.playCount, trackCount: item.trackCount}
       this.$emit('songDetail', param)
     },
     selectItem (item) {
       this.$emit('selectItem', item)
     },
     singerDetail (item) {
-      const param = {id: item.id, image: item.img1v1Url, title: item.name}
+      const param = {id: item.id, image: item.img1v1Url.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp'), title: item.name}
       this.$emit('singerDetail', param)
     }
   }

@@ -13,7 +13,7 @@ class Singer {
   constructor ({id, name, image, aliaName}) {
     this.id = id
     this.name = name
-    this.image = image
+    this.image = image.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')
     this.aliaName = aliaName
   }
 }

@@ -40,7 +40,7 @@ export function createRecommendListSong (music) {
     singer: singerName(artists),
     name: music.name,
     album: album,
-    image: album.picUrl,
+    image: album.picUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp'),
     artist: artists
   })
 }
