@@ -2,7 +2,7 @@
   <div class="bottom">
     <div class="btn_list">
       <div class="like-btn iconfont"></div>
-      <div class="pinglun-btn iconfont hasNum">
+      <div class="pinglun-btn iconfont hasNum" @click.stop="gotoComment">
         <div class="num">{{commentCount|commentCount}}</div>
       </div>
       <div class="more-btn iconfont"></div>
@@ -49,6 +49,9 @@ export default {
     }
   },
   methods: {
+    gotoComment () {
+      this.$emit('openComment')
+    },
     changeMode () {
       if (this.playMode === 3) {
         this.$store.state.playMode = 1
@@ -90,11 +93,9 @@ export default {
   },
   filters: {
     commentCount (val) {
-      if (val > 100000) {
-        return '10w+'
-      }
       if (val > 10000) {
-        return '1w+'
+        const result = `${parseInt(val / 10000)}w+`
+        return result
       } else {
         return val
       }

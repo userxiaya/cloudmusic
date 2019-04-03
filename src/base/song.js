@@ -35,12 +35,13 @@ export function createRecommendSong (music) {
 export function createRecommendListSong (music) {
   const artists = music.artists || music.ar
   const album = music.album || music.al
+  const image = album.picUrl || ''
   return new Song({
     id: music.id,
     singer: singerName(artists),
     name: music.name,
     album: album,
-    image: album.picUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp'),
+    image: image.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp'),
     artist: artists
   })
 }

@@ -56,6 +56,7 @@
       :position="playerObj.position"
       :commentCount="commentCount"
       @percentChangeEnd="seekTo"
+      @openComment="$emit('openComment')"
     ></bottom>
   </div>
 </template>

@@ -9,7 +9,7 @@ const myMessage = () => import('@/pages/views/myMessage')
 const search = () => import('@/pages/views/search')
 const songDetail = () => import('@/pages/songDetail')
 const singerDetail = () => import('@/pages/singerDetail')
-const commentMusic = () => import('@/pages/commentMusic')
+// const commentMusic = () => import('@/pages/commentMusic')
 Vue.use(Router)
 
 export default new Router({
@@ -30,14 +30,14 @@ export default new Router({
       name: 'views',
       component: views,
       children: [
-        {
-          path: '/commentMusic',
-          name: 'commentMusic',
-          component: commentMusic,
-          meta: {
-            index: 3
-          }
-        },
+        // {
+        //   path: '/commentMusic',
+        //   name: 'commentMusic',
+        //   component: commentMusic,
+        //   meta: {
+        //     index: 3
+        //   }
+        // },
         {
           path: '/songDetail',
           name: 'songDetail',

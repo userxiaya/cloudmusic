@@ -1,58 +1,120 @@
 <template>
   <div class="main">
-    <div class="songDetail">
-      <img
-        class="image"
-        src="http://p2.music.126.net/-I0jlrPXHaOb0JYEvRYLyw==/109951163746827642.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp"
-      />
-      <div class="right">
-        <div class="name">うまるん体操</div>
-        <div class="singer">田中あいみ/白石晴香/影山灯/古川由利奈</div>
-        <div class="iconfont icon-right">
-          <div class="icon"></div>
+    <div class="header" :style="statusbar">
+        <div class="back" @click.stop="closeComment">
+          <strong class="iconback iconfont"></strong>
+        </div>
+        <div class="text">
+          <h1 class="title" style="margin: 0;padding: 0;border: 0;font-size: 100%;font-weight: 400;vertical-align: baseline;">评论</h1>
+        </div>
+    </div>
+    <scroll :data="comment" :click="true">
+      <div class="list">
+        <div class="songDetail">
+          <img
+            class="image"
+            v-lazy="image"
+            :key="image"
+          />
+          <div class="right">
+            <div class="name">{{name}}</div>
+            <div class="singer">{{singer}}</div>
+            <div class="iconfont icon-right">
+              <div class="icon"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hot_comment">
+          <h1 class="title">精彩评论</h1>
+          <ul>
+            <li class="item" v-for="(item, index) in comment" :key="index">
+              <div class="user">
+                <div class="left">
+                  <img
+                    class="image"
+                    v-lazy="item.user.avatarUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')" :key="item.user.avatarUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')"
+                  />
+                  <div class="text">
+                    <div class="userName">{{item.user.nickname}}</div>
+                    <div class="time">{{item.time|formatTime('yyyy年MM月dd日')}}</div>
+                  </div>
+                </div>
+                <div class="right">
+                  123645&nbsp;&nbsp;
+                  <img src="@/assets/good.png" />
+                </div>
+              </div>
+              <div class="comment">
+              {{item.content}}
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div class="hot_comment">
-      <h1 class="title">精彩评论</h1>
-      <ul>
-        <li class="item">
-          <div class="user">
-            <div class="left">
-              <img
-                class="image"
-                src="http://p2.music.126.net/-I0jlrPXHaOb0JYEvRYLyw==/109951163746827642.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp"
-              />
-              <div class="text">
-                <div class="userName">user</div>
-                <div class="time">2015/01/02</div>
-              </div>
-            </div>
-            <div class="right">
-              123645&nbsp;&nbsp;
-              <img src="@/assets/good.png" />
-            </div>
-          </div>
-          <div class="comment">
-            sandjk,bfkjsdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddb
-          </div>
-        </li>
-      </ul>
-    </div>
+    </scroll>
   </div>
 </template>
-
 <script>
+import scroll from '@/components/scroll'
 export default {
   data () {
     return {
-      image: '',
-      name: '',
-      singer: '',
+      statusbar: {},
       artistNew: []
     }
   },
-  mounted () {}
+  mounted () {
+    if (window.plus) {
+      this.plusLoad()
+    } else {
+      document.addEventListener('plusready', () => {
+        this.plusLoad()
+      })
+    }
+  },
+  props: {
+    image: {
+      type: String,
+      default () {
+        return ''
+      }
+    },
+    name: {
+      type: String,
+      default () {
+        return ''
+      }
+    },
+    singer: {
+      type: String,
+      default () {
+        return ''
+      }
+    },
+    comment: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
+  components: {
+    scroll
+  },
+  methods: {
+    plusLoad () {
+      const height = window.plus.navigator.getStatusbarHeight()
+      const headHeight = 44
+      this.statusbar = {
+        'background-color': '#d44439',
+        'height': `${height + headHeight}px`,
+        'padding-top': `${height}px`
+      }
+    },
+    closeComment () {
+      this.$emit('closeComment')
+    }
+  }
 }
 </script>
 
@@ -64,6 +126,13 @@ export default {
   height: 100%;
   overflow: hidden;
   background-color: #ffffff;
+  .list {
+    width: 100%;
+    height: auto;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    padding-top: 90px;
+  }
   .songDetail {
     width: 100%;
     height: auto;
@@ -142,6 +211,7 @@ export default {
       color: #2e3030;
     }
     .item {
+      margin-bottom: 15px;
       width: 100%;
       height: auto;
       list-style: none;
@@ -215,5 +285,46 @@ export default {
   ul {
     padding-left: 0px;
   }
+  .header {
+  box-sizing: border-box;
+  position: fixed;
+  background: #d44439;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  height: 44px; /*no*/
+  color: #fff;
+  z-index: 100;
+  .back {
+    position: absolute;
+    left: 15px; /*no*/
+    width: 100%;
+    line-height: 44px; /*no*/
+    font-size: 40px; /*no*/
+    .iconback {
+      position: absolute;
+      color: #f1f1f1;
+      height: 44px; /*no*/
+      font-size: 28px; /*no*/
+      line-height: 44px; /*no*/
+      &:before {
+        content: $icon-back;
+      }
+    }
+  }
+  .text {
+    position: absolute;
+    left: 48px; /*no*/
+    width: 80%;
+    line-height: 44px; /*no*/
+    font-size: 18px; /*no*/
+    @include no-wrap();
+    .title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}
 }
 </style>
