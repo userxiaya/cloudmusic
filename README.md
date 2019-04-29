@@ -16,6 +16,11 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+#
+编译过后使用h5buider运行项目（该项目大量使用h5plus的api播放音频）
 ```
+
+
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
