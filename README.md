@@ -18,7 +18,7 @@ npm run build
 npm run build --report
 
 #
-编译过后使用h5buider运行项目（该项目大量使用h5plus的api播放音频）
+编译过后使用h5buider运行项目（该项目使用h5plus的api播放音频）
 ```
 
 
