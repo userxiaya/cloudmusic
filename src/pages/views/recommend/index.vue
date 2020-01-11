@@ -51,9 +51,14 @@
 import { mapGetters, mapMutations } from 'vuex'
 import 'swiper/dist/css/swiper.css'
 import {
-  pageApiRecommend
+  banner,
+  personalized,
+  newSong,
+  recommendResource,
+  recommendSongs
 } from '@/base/api'
 import { swiper, swiperSlide } from '@/components/vue-awesome-swiper'
+import { createRecommendSong } from '@/base/song'
 import scroll from '@/components/scroll'
 export default {
   data () {
@@ -91,6 +96,83 @@ export default {
     ...mapMutations({
       playBySong: 'PLAYBYSONG'
     }),
+    getBannerList () {
+      banner().then(res => {
+        res = res.data
+        if (res.code + '' === '200') {
+          if (res.banners && res.banners.length > 0) {
+            const list = []
+            res.banners.forEach(e => {
+              const obj = {
+                image: e.imageUrl || e.picUrl,
+                url: e.url,
+                target: e.targetId === '0' ? '' : e.targetId
+              }
+              list.push(obj)
+            })
+            this.bannerList = list.splice(3)
+            this.listLoad.bannerList = true
+          }
+        }
+      })
+    },
+    async getPersonalized (flag) {
+      this.listLoad.personalizedList = false
+      let recommend = []
+      if (flag) {
+        const resource = await recommendResource()
+        recommend =
+          resource.data &&
+          resource.data.code + '' === '200' &&
+          resource.data.recommend
+            ? resource.data.recommend || []
+            : []
+        recommend.forEach(e => {
+          if (e.picUrl) {
+            e.image = e.picUrl
+            e.playCount = e.playcount
+          }
+        })
+      } else {
+        const resource = await personalized()
+        recommend =
+          resource.data &&
+          resource.data.code + '' === '200' &&
+          resource.data.result
+            ? resource.data.result || []
+            : []
+        recommend.forEach(e => {
+          if (e.picUrl) {
+            e.image = e.picUrl
+          }
+        })
+      }
+      this.personalizedList = recommend
+      this.listLoad.personalizedList = true
+    },
+    async getNewsong (flag) {
+      this.listLoad.newSongList = false
+      if (flag) {
+        const data1 = await recommendSongs()
+        const res = data1.data
+        const result = res.recommend || []
+        let list = result.map(item => {
+          return createRecommendSong(item)
+        })
+        this.newSongList = list
+      } else {
+        const data2 = await newSong()
+        const res = data2.data
+        if (res.code + '' === '200') {
+          const result = res.result || []
+          let list = result.map(item => {
+            return createRecommendSong(item)
+          })
+          this.newSongList = list
+        }
+      }
+      this.listLoad.newSongList = true
+    },
     play (item) {
       if (this.currentSong.id && this.currentSong.id + '' === item.id + '') {
         this.$bus.emit('player-show')
@@ -99,16 +181,6 @@ export default {
         const song = item
         this.playBySong({ self, song })
       }
-    },
-    getData () {
-      pageApiRecommend().then(res => {
-        const data = (res.status + '' === '200') ? res.data : null
-        if (data) {
-          this.bannerList = data.bannerList
-          this.personalizedList = data.personalizedList
-          this.newSongList = data.newSongList
-        }
-      })
     }
   },
   mounted () {
@@ -124,7 +196,11 @@ export default {
     if (dataRefashDate === `${now.getFullYear()}` + `${now.getMonth() + 1}` + `${now.getDate()}`) {
       return
     }
-    this.getData()
+    this.getBannerList()
+    if (this.$store.state.checkLogin) {
+      this.getPersonalized(this.$store.state.loginState)
+      this.getNewsong(this.$store.state.loginState)
+    }
     if (window.plus) {
       const top = window.plus.navigator.getStatusbarHeight()
       this.bottom = top
@@ -169,10 +245,12 @@ export default {
   },
   watch: {
     '$store.state.checkLogin' () {
-      this.getData()
+      this.getPersonalized(this.$store.state.loginState)
+      this.getNewsong(this.$store.state.loginState)
     },
     '$store.state.loginState' () {
-      this.getData()
+      this.getPersonalized(this.$store.state.loginState)
+      this.getNewsong(this.$store.state.loginState)
     },
     'indexPageData' (val) {
       if (val.banner && val.banner.length > 0 && val.personalized && val.personalized.length > 0 && val.newSong && val.newSong.length > 0) {

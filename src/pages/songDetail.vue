@@ -40,10 +40,10 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import scroll from '@/components/scroll'
-import { pageApiSongDetail } from '@/base/api'
+import { playlistDetail } from '@/base/api'
 import loading from '@/components/loading'
 import songList from '@/components/songList'
-// import { createRecommendListSong } from '@/base/song'
+import { createRecommendListSong } from '@/base/song'
 export default {
   data () {
     return {
@@ -99,9 +99,18 @@ export default {
         this.pageType = 'historyList'
         return
       }
-      pageApiSongDetail(params.id).then(res => {
-        if (res.status + '' === '200') {
-          this.songs = res.data
+      playlistDetail(params.id).then(res => {
+        res = res.data
+        if (res.code + '' === '200') {
+          let list =
+            res.playlist && res.playlist.tracks ? res.playlist.tracks : []
+          this.timer = setTimeout(() => {
+            if (this.inPage) {
+              this.songs = list.map(item => {
+                return createRecommendListSong(item)
+              })
+            }
+          }, 500)
         }
       })
     })

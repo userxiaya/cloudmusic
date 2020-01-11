@@ -1,44 +1,13 @@
 // import axios from 'axios'
 import fetch from './fetch'
 let get = function (url) {
-  const qz = 'http://47.107.134.246:3000'
-  // const qz = process.env.NODE_ENV === 'production' ? 'http://47.107.134.246:3000' : '/apis'
+//   const qz = '/apis'
+  const qz = process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:3000' : '/apis'
   return fetch({
     method: 'get',
     url: `${qz + url}`
   })
   // return axios.get(`${qz + url}`)
-}
-let getPageApi = function (url) {
-  const qz = 'http://47.107.134.246:8082'
-  return fetch({
-    method: 'get',
-    url: `${qz + url}`
-  })
-}
-export function pageApiLogin (phone, password) {
-  const url = `/recommend?phone=${phone}&password=${password}`
-  return getPageApi(url)
-}
-export function pageApiRecommend () {
-  const url = `/recommend`
-  return getPageApi(url)
-}
-export function pageApiSongDetail (id) {
-  const url = `/songDetail?id=${id}`
-  return getPageApi(url)
-}
-export function pageApiUserPlaylist (uid) {
-  const url = `/userPlaylist?uid=${uid}`
-  return getPageApi(url)
-}
-export function pageApiToplistDetail () {
-  const url = `/toplistDetail`
-  return getPageApi(url)
-}
-export function pageApiCommentMusic (id, limit, offset) {
-  const url = `/commentMusic?id=${id}&limit=${limit || 1}&offset=${offset || 0}`
-  return getPageApi(url)
 }
 
 export function getSong (id) {
