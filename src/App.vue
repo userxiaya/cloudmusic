@@ -72,6 +72,26 @@ export default {
       }
     },
     plusLoad () {
+      const webview = window.plus.webview.currentWebview()
+      const Intent = window.plus.android.importClass('android.content.Intent')
+      const intent = new Intent()
+      const main = window.plus.android.runtimeMainActivity()
+      const self = this
+      window.plus.key.addEventListener('backbutton', function () {
+        if (self.playerShowFlag === true) {
+          self.playerHide()
+        } else {
+          webview.canBack(function (e) {
+            if (e.canBack) {
+              webview.back()
+            } else {
+              intent.setAction(Intent.ACTION_MAIN) // "android.intent.action.MAIN"
+              intent.addCategory(Intent.CATEGORY_HOME) // "android.intent.category.HOME"
+              main.startActivity(intent)
+            }
+          })
+        }
+      })
       this.audio = new AudioPlus('', this.setPlayerObj, this.setPlaying)
       if (this.currentSong.url) {
         this.playSong(this.currentSong.url)

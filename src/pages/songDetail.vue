@@ -348,6 +348,6 @@ export default {
   transform: translateY(-50%);
 }
 .haveplayer {
-  padding-bottom: 80px; /* no*/
+  padding-bottom: 80Px; /* no*/
 }
 </style>

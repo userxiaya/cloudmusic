@@ -82,7 +82,7 @@ export default {
   bottom: 0;
   z-index: 180;
   width: 100%;
-  height: 60px; /* no*/
+  height: 60Px; /* no*/
   background: hsla(0, 0%, 100%, 0.95);
   &.mini-enter-active,
   &.mini-leave-active {
@@ -93,9 +93,9 @@ export default {
     opacity: 0;
   }
   .icon {
-    flex: 0 0 40px; /* no*/
-    width: 40px; /* no*/
-    padding: 0 10px 0 20px; /* no*/
+    flex: 0 0 40Px; /* no*/
+    width: 40Px; /* no*/
+    padding: 0 10px 0 20Px; /* no*/
     img {
       border-radius: 50%;
       &.play {
@@ -113,15 +113,15 @@ export default {
     flex: 1;
     overflow: hidden;
     .name {
-      margin-bottom: 2px; /* no*/
-      line-height: 14px; /* no*/
+      margin-bottom: 2Px; /* no*/
+      line-height: 14Px; /* no*/
       @include no-wrap();
       font-size: $font-size-small;
       color: $color-text;
     }
     .desc {
-      margin-bottom: 2px; /* no*/
-      line-height: 14px; /* no*/
+      margin-bottom: 2Px; /* no*/
+      line-height: 14Px; /* no*/
       @include no-wrap();
       font-size: $font-size-small;
       color: $color-text;
@@ -129,18 +129,18 @@ export default {
   }
   .control {
     flex: 0 0 30Px; /* no*/
-    padding: 0 10px; /* no*/
+    padding: 0 10Px; /* no*/
     .icon-play-mini,
     .icon-pause-mini,
     .icon-playlist,
     .iconfont {
-      font-size: 30px; /* no*/
+      font-size: 30Px; /* no*/
       color: $color-theme-d;
     }
     .iconfont {
       position: relative;
-      left: -5px; /* no*/
-      top: -3px; /* no*/
+      left: -5Px; /* no*/
+      top: -3Px; /* no*/
     }
     .fa-play {
       &:before {
@@ -157,10 +157,10 @@ export default {
         content: $icon-minizanting;
       }
       color: $color-theme-d;
-      font-size: 12px; /* no*/
+      font-size: 12Px; /* no*/
       position: absolute;
-      left: 10px; /* no*/
-      top: 9.5px; /* no*/
+      left: 10Px; /* no*/
+      top: 9.5Px; /* no*/
     }
   }
 }
