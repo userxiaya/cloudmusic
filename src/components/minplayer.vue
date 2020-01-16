@@ -3,14 +3,24 @@
     <transition name="mini">
       <div class="mini-player" v-show="currentSong.id" @click.stop="$bus.emit('player-show')">
         <div class="icon">
-          <img :class="playing?'play':'play pause'" v-lazy="currentSong.image" :key="currentSong.image" width="40" height="40">
+          <img
+            :class="playing?'play':'play pause'"
+            v-lazy="currentSong.image"
+            :key="currentSong.image"
+            width="40"
+            height="40"
+          />
         </div>
         <div class="text">
           <div class="name" v-html="currentSong.name"></div>
           <div class="desc" v-html="singer"></div>
         </div>
         <div class="control" @click.stop="$bus.emit('set-play-state',!playing)">
-          <progress-circle :radius="radius" :percent="percent+''">
+          <progress-circle
+            style="width:100%; text-align:center"
+            :radius="radius"
+            :percent="percent+''"
+          >
             <i :class="playing?'iconfont fa-stop fa':'iconfont fa-play fa'"></i>
           </progress-circle>
         </div>
@@ -118,8 +128,7 @@ export default {
     }
   }
   .control {
-    flex: 0 0 30px; /* no*/
-    width: 30px; /* no*/
+    flex: 0 0 30Px; /* no*/
     padding: 0 10px; /* no*/
     .icon-play-mini,
     .icon-pause-mini,
@@ -138,10 +147,10 @@ export default {
         content: $icon-play;
       }
       color: $color-theme-d;
-      font-size: 14px; /* no*/
+      font-size: 14Px; /* no*/
       position: absolute;
-      left: 10.5px; /* no*/
-      top: 9px; /* no*/
+      left: 10.5Px; /* no*/
+      top: 9Px; /* no*/
     }
     .fa-stop {
       &:before {
