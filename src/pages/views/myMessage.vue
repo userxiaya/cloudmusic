@@ -107,7 +107,7 @@ export default {
                 e.name =
                   e.userId + '' === uid + '' &&
                   e.name.indexOf(this.$store.state.userName) !== -1
-                    ? '我喜欢的音乐'
+                    ? e.name.replace(this.$store.state.userName, '我')
                     : e.name
               })
               const subList = playlist.filter(e => {
