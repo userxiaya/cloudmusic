@@ -2,7 +2,7 @@
 import fetch from './fetch'
 let get = function (url) {
 //   const qz = '/apis'
-  const qz = process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:3000' : '/apis'
+  const qz = process.env.NODE_ENV === 'production' ? 'http://47.107.59.101:3000' : '/apis'
   return fetch({
     method: 'get',
     url: `${qz + url}`
@@ -12,7 +12,7 @@ let get = function (url) {
 
 export function getSong (id) {
   // const url = `/song/url?id=${id}`
-  const url = `/music/url?id=${id}`
+  const url = `/song/url?id=${id}&br=320000`
   return get(url)
 }
 

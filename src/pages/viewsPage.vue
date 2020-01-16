@@ -1,5 +1,5 @@
 <template>
-  <div class="views">
+  <div :class="['views',playerShowFlag?'showPlayBox':'']">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
@@ -9,7 +9,7 @@
 
 <script>
 import minplayer from '@/components/minplayer'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -21,7 +21,8 @@ export default {
     minplayer
   },
   computed: {
-    ...mapGetters(['currentSong'])
+    ...mapGetters(['currentSong']),
+    ...mapState(['playerShowFlag'])
   },
   methods: {
     setMinPlayer (flag) {
@@ -46,5 +47,8 @@ export default {
   height: 100%;
   position: absolute;
   overflow: hidden;
+  &.showPlayBox {
+    z-index: -1;
+  }
 }
 </style>
