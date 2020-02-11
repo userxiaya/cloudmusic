@@ -119,15 +119,18 @@ const mutations = {
     }
     playSongs(state.currentIndex, self)
   },
-  [types.playBySongList] (state, { list, id }) {
+  [types.playBySongList] (state, { list, id, self }) {
     this.commit('SET_MUSICLIST', list)
+    let index = null
     switch (state.playType) {
       case 2:
-        this.commit('SET_CURRENTINDEX', list[randomNum(0, list.length - 1)].id)
+        index = list[randomNum(0, list.length - 1)].id
         break
       default:
-        this.commit('SET_CURRENTINDEX', id)
+        index = id
     }
+    this.commit('SET_CURRENTINDEX', index)
+    playSongs(state.currentIndex, self)
   },
   [types.nextSong] (state, { self }) {
     const index = state.musicList.map(o => o.id).indexOf(state.currentIndex)

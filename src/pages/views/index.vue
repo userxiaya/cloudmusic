@@ -1,9 +1,9 @@
 <template>
     <div class="container">
       <div class="header" v-immersed1>
-          <div class="mine">
+          <!-- <div class="mine">
             <i class="iconfont icon-list"></i>
-          </div>
+          </div> -->
           <div class="center">
             <div :class="$route.path==='/myMessage'?'item active':'item'">
               <i class="iconfont icon-music" @click.stop="$router.replace('/myMessage')"></i>

@@ -23,7 +23,7 @@
           <div :class="currentSong.id?'song-list-wrapper haveplayer':'song-list-wrapper'">
             <div class="sequence-play">
               <i class="iconfont icon-bofangicon"></i>
-              <div class="text" @click.stop="playBySongList({list:songs,id:songs[0].id})">
+              <div class="text" @click.stop="playSongList()">
                   <i class="play-btn iconfont" style="padding-right: 0.1rem"></i>
                   播放全部
               </div>
@@ -165,6 +165,10 @@ export default {
         const song = item
         this.playBySong({ self, song })
       }
+    },
+    playSongList () {
+      const songs = this.songs
+      this.playBySongList({list: songs, id: songs[0].id, self: this})
     }
   },
   watch: {

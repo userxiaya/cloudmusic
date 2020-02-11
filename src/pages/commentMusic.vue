@@ -1,7 +1,7 @@
 <template>
 <transition :name="slideName">
   <div class="main">
-    <div class="header" :style="statusbar">
+    <div class="header" :style="statusbar" v-immersed1>
         <div class="back" @click.stop="closeComment">
           <strong class="iconback iconfont"></strong>
         </div>
@@ -9,49 +9,50 @@
           <h1 class="title" style="margin: 0;padding: 0;border: 0;font-size: 100%;font-weight: 400;vertical-align: baseline;">热门评论</h1>
         </div>
     </div>
-    <scroll :data="hotComment" :click="true">
-      <div class="list">
-        <div class="songDetail">
-          <img
-            class="image"
-            v-lazy="image"
-            :key="image"
-          />
-          <div class="right">
-            <div class="name">{{name}}</div>
-            <div class="singer">{{singer}}</div>
-            <div class="iconfont icon-right">
-              <div class="icon"></div>
+    <scroll :data="hotComment"  :click="true">
+        <div class="list">
+            <div class="statusbar" :style="{height:statusbarHeight}">&nbsp;</div>
+            <div class="songDetail">
+            <img
+                class="image"
+                v-lazy="image"
+                :key="image"
+            />
+            <div class="right">
+                <div class="name">{{name}}</div>
+                <div class="singer">{{singer}}</div>
+                <div class="iconfont icon-right">
+                <div class="icon"></div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="hot_comment">
-          <h1 class="title">精彩评论</h1>
-          <ul>
-            <li class="item" v-for="(item, index) in hotComment" :key="index">
-              <div class="user">
-                <div class="left">
-                  <img
-                    class="image"
-                    v-lazy="item.user.avatarUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')" :key="item.user.avatarUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')"
-                  />
-                  <div class="text">
-                    <div class="userName">{{item.user.nickname}}</div>
-                    <div class="time">{{item.time|formatTime('yyyy年MM月dd日')}}</div>
-                  </div>
+            </div>
+            <div class="hot_comment">
+            <h1 class="title">精彩评论</h1>
+            <ul>
+                <li class="item" v-for="(item, index) in hotComment" :key="index">
+                <div class="user">
+                    <div class="left">
+                    <img
+                        class="image"
+                        v-lazy="item.user.avatarUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')" :key="item.user.avatarUrl.replace(/.jpg|.jpeg|.png|.gif|.bmp/g, '.webp?imageView&thumbnail=360y360&quality=75&tostatic=0&type=webp')"
+                    />
+                    <div class="text">
+                        <div class="userName">{{item.user.nickname}}</div>
+                        <div class="time">{{item.time|formatTime('yyyy年MM月dd日')}}</div>
+                    </div>
+                    </div>
+                    <div class="right">
+                    123645&nbsp;&nbsp;
+                    <img src="@/assets/good.png" />
+                    </div>
                 </div>
-                <div class="right">
-                  123645&nbsp;&nbsp;
-                  <img src="@/assets/good.png" />
+                <div class="comment">
+                {{item.content}}
                 </div>
-              </div>
-              <div class="comment">
-              {{item.content}}
-              </div>
-            </li>
-          </ul>
+                </li>
+            </ul>
+            </div>
         </div>
-      </div>
     </scroll>
   </div>
 </transition>
@@ -68,7 +69,8 @@ export default {
       name: '',
       singer: '',
       hotComment: [],
-      slideName: 'up'
+      slideName: 'up',
+      statusbarHeight: '0px'
     }
   },
   mounted () {
@@ -79,6 +81,8 @@ export default {
         this.plusLoad()
       })
     }
+  },
+  activated () {
     const params = this.$route.params || {}
     this.image = params.image
     this.singer = params.singer
@@ -99,6 +103,7 @@ export default {
   methods: {
     plusLoad () {
       const height = window.plus.navigator.getStatusbarHeight()
+      this.statusbarHeight = `${window.plus.navigator.getStatusbarHeight()}px`
       const headHeight = 44
       this.statusbar = {
         'background-color': '#d44439',
@@ -116,6 +121,9 @@ export default {
 <style scoped lang="scss">
 @import "@/common/scss/icon.scss";
 @import "@/common/scss/index.scss";
+.statusbar {
+    width: 100%;
+}
 .up-enter {
    -webkit-transform: translate3d(0,100%,0);
    -moz-transform: translate3d(0,100%,0);
@@ -300,45 +308,45 @@ export default {
     padding-left: 0px;
   }
   .header {
-  box-sizing: border-box;
-  position: fixed;
-  background: #d44439;
-  z-index: 10;
-  top: 0;
-  width: 100%;
-  height: 44px; /*no*/
-  color: #fff;
-  z-index: 100;
-  .back {
-    position: absolute;
-    left: 15px; /*no*/
+    box-sizing: border-box;
+    position: fixed;
+    background: #d44439;
+    z-index: 10;
+    top: 0;
     width: 100%;
-    line-height: 44px; /*no*/
-    font-size: 40px; /*no*/
-    .iconback {
-      position: absolute;
-      color: #f1f1f1;
-      height: 44px; /*no*/
-      font-size: 28px; /*no*/
-      line-height: 44px; /*no*/
-      &:before {
-        content: $icon-back;
-      }
+    height: 44px; /*no*/
+    color: #fff;
+    z-index: 100;
+    .back {
+        position: absolute;
+        left: 15px; /*no*/
+        width: 100%;
+        line-height: 44px; /*no*/
+        font-size: 40px; /*no*/
+        .iconback {
+        position: absolute;
+        color: #f1f1f1;
+        height: 44px; /*no*/
+        font-size: 28px; /*no*/
+        line-height: 44px; /*no*/
+        &:before {
+            content: $icon-back;
+        }
+        }
+    }
+    .text {
+        position: absolute;
+        left: 48px; /*no*/
+        width: 80%;
+        line-height: 44px; /*no*/
+        font-size: 18px; /*no*/
+        @include no-wrap();
+        .title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        }
     }
   }
-  .text {
-    position: absolute;
-    left: 48px; /*no*/
-    width: 80%;
-    line-height: 44px; /*no*/
-    font-size: 18px; /*no*/
-    @include no-wrap();
-    .title {
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-  }
-}
 }
 </style>
