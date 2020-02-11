@@ -40,7 +40,7 @@ export function login (phone, password) {
   return get(url)
 }
 export function banner () {
-  const url = `/banner`
+  const url = `/banner?type=2`
   return get(url)
 }
 export function recommendResource () {

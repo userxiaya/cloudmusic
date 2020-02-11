@@ -7,7 +7,7 @@
           <div class="slider" v-if="bannerList.length>0">
             <swiper :options="swiperOption">
               <swiper-slide v-for="slide in bannerList" :key="slide.image">
-                <img :src="slide.image" width="100%" height="auto" ref="slideImage" />
+                <img @click.stop="bannerClick(slide.song)" :src="slide.image" width="100%" height="auto" ref="slideImage" />
               </swiper-slide>
               <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
@@ -104,13 +104,15 @@ export default {
             const list = []
             res.banners.forEach(e => {
               const obj = {
-                image: e.imageUrl || e.picUrl,
+                image: e.imageUrl || e.picUrl || e.pic,
                 url: e.url,
+                song: e.song ? createRecommendSong(e) : null,
                 target: e.targetId === '0' ? '' : e.targetId
               }
               list.push(obj)
             })
-            this.bannerList = list.splice(3)
+
+            this.bannerList = list
             this.listLoad.bannerList = true
           }
         }
@@ -180,6 +182,13 @@ export default {
         const self = this
         const song = item
         this.playBySong({ self, song })
+      }
+    },
+    bannerClick (song) {
+      if (song) {
+        this.play(song)
+      } else {
+        this.toast('banner暂不支持非音乐配置')
       }
     }
   },

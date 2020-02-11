@@ -100,6 +100,9 @@ export default {
         for (let key in this.currentMusic) {
           currentMusic[key] = val[key]
         }
+        if (!val || !val.id) {
+          return
+        }
         songComment(val.id).then(res => {
           if (res.status === 200) {
             const data = res.data

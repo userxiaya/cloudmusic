@@ -1,11 +1,11 @@
 <template>
   <div class="bottom">
     <div class="btn_list">
-      <div class="like-btn iconfont"></div>
+      <div class="like-btn iconfont" @click.stop="toast('抱歉！暂时不支持该功能')"></div>
       <div class="pinglun-btn iconfont hasNum" @click.stop="gotoComment">
         <div class="num">{{commentCount|commentCount}}</div>
       </div>
-      <div class="more-btn iconfont"></div>
+      <div class="more-btn iconfont" @click.stop="toast('抱歉！暂时不支持该功能')"></div>
     </div>
     <bar :duration="duration" :position="position" @percentChangeEnd="seekTo"></bar>
     <div class="btn-box2">

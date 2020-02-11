@@ -11,7 +11,7 @@
           <div :class="$route.path.indexOf('/recommend')!=-1?'item active':'item'">
             <i class="iconfont icon-logo" @click.stop="gotoRecommend"></i>
           </div>
-          <div class="item">
+          <div class="item" @click.stop="toast('抱歉！暂时不支持该功能')">
             <i class="iconfont icon-movie"></i>
           </div>
         </div>

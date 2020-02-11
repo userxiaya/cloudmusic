@@ -19,8 +19,10 @@
           </div>
           <div :class="currentSong.id?'song-list-wrapper haveplayer':'song-list-wrapper'">
             <div class="sequence-play">
-              <i class="iconfont icon-bofangicon"></i>
-              <span class="text">播放全部</span>
+              <span class="text" @click.stop="playSongList">
+                <i class="play-btn iconfont" style="padding-right: 0.1rem"></i>
+                播放全部
+              </span>
               <span class="count">(共{{songs.length}}首)</span>
             </div>
             <songList :songs="songs" @select="select"></songList>
@@ -106,7 +108,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      playBySong: 'PLAYBYSONG'
+      playBySong: 'PLAYBYSONG',
+      playBySongList: 'PLAYBYSONGLIST'
     }),
     pageActivity (params) {
       this.slideName = 'up'
@@ -157,6 +160,10 @@ export default {
         const song = item
         this.playBySong({ self, song })
       }
+    },
+    playSongList () {
+      const songs = this.songs
+      this.playBySongList({list: songs, id: songs[0].id, self: this})
     }
   },
   watch: {
@@ -180,6 +187,13 @@ export default {
 <style scoped lang="scss">
 @import "@/common/scss/index.scss";
 @import "@/common/scss/icon.scss";
+.play-btn {
+    flex: 1;
+    text-align: center;
+    &:before {
+      content: $icon-bofang;
+    }
+  }
 .up-enter {
    -webkit-transform: translate3d(0,100%,0);
    -moz-transform: translate3d(0,100%,0);

@@ -15,9 +15,9 @@
                 </div>
                 <scroll :data="musicList" class="content" ref="scroll" v-if="showFlag">
                     <ul style="width:100%; height:auto">
-                        <li class="item" v-for="(item,index) in musicList" :key="index" @click.stop="del(index)">
+                        <li class="item" v-for="(item,index) in musicList" :key="index" @click.stop="select(item)">
                             <div class="text">{{item.name}}-{{item.singer}}</div>
-                            <span class="delete"><i class="icon-delete iconfont"></i></span>
+                            <span class="delete" @click.stop="del(index)"><i class="icon-delete iconfont"></i></span>
                         </li>
                     </ul>
                 </scroll>
@@ -41,7 +41,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setMusicList: 'SET_MUSICLIST'
+      setMusicList: 'SET_MUSICLIST',
+      playBySong: 'PLAYBYSONG'
     }),
     hide () {
       this.showFlag = false
@@ -81,10 +82,20 @@ export default {
         }
       }
       self.setMusicList(list)
+    },
+    select (item) {
+      if (this.currentSong.id && this.currentSong.id + '' === item.id + '') {
+        this.hide()
+      } else {
+        const self = this
+        const song = item
+        this.playBySong({ self, song })
+        this.hide()
+      }
     }
   },
   computed: {
-    ...mapGetters(['musicList', 'currentMusicIndex']),
+    ...mapGetters(['musicList', 'currentMusicIndex', 'currentSong']),
     ...mapState(['playMode']),
     playModeClass () {
       let lei = 'liebiaoxunhuan'

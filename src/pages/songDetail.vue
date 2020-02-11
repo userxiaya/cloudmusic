@@ -22,7 +22,6 @@
           </div>
           <div :class="currentSong.id?'song-list-wrapper haveplayer':'song-list-wrapper'">
             <div class="sequence-play">
-              <i class="iconfont icon-bofangicon"></i>
               <div class="text" @click.stop="playSongList()">
                   <i class="play-btn iconfont" style="padding-right: 0.1rem"></i>
                   播放全部
