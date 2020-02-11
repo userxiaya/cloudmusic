@@ -89,6 +89,10 @@ export function songDetail (id) {
   const url = `/song/detail?ids=${id}`
   return get(url)
 }
+export function songComment (id) {
+  const url = `/comment/music?id=${id}`
+  return get(url)
+}
 export function getSingers () {
   const url = '/top/artists?limit=100'
   return get(url)

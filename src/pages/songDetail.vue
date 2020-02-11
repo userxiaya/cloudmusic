@@ -23,7 +23,10 @@
           <div :class="currentSong.id?'song-list-wrapper haveplayer':'song-list-wrapper'">
             <div class="sequence-play">
               <i class="iconfont icon-bofangicon"></i>
-              <span class="text">播放全部</span>
+              <div class="text" @click.stop="playBySongList({list:songs,id:songs[0].id})">
+                  <i class="play-btn iconfont" style="padding-right: 0.1rem"></i>
+                  播放全部
+              </div>
               <span class="count">(共{{trackCount}}首)</span>
             </div>
             <songList :songs="songs" @select="select"></songList>
@@ -145,7 +148,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      playBySong: 'PLAYBYSONG'
+      playBySong: 'PLAYBYSONG',
+      playBySongList: 'PLAYBYSONGLIST'
     }),
     scroll (pos) {
       this.scrollY = pos.y
@@ -191,6 +195,13 @@ export default {
 <style scoped lang="scss">
 @import "@/common/scss/index.scss";
 @import "@/common/scss/icon.scss";
+.play-btn {
+    flex: 1;
+    text-align: center;
+    &:before {
+      content: $icon-bofang;
+    }
+  }
 .up-enter {
    -webkit-transform: translate3d(0,100%,0);
    -moz-transform: translate3d(0,100%,0);
@@ -325,7 +336,7 @@ export default {
     align-items: center;
     width: 100%;
     height: 40px;
-    padding-left: 16px;
+    line-height: 40px;
     border-bottom: 1px solid rgb(228, 228, 228);
     .iconfont {
       font-size: 18px;

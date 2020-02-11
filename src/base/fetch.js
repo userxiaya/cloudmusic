@@ -3,11 +3,7 @@ import axios from 'axios'
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.BASE_API, // node环境的不同，对应不同的baseURL
-  // timeout: 10000, // 请求的超时时间
-  // 设置默认请求头，使post请求发送的是formdata格式数据// axios的header默认的Content-Type好像是'application/json;charset=UTF-8',我的项目都是用json格式传输，如果需要更改的话，可以用这种方式修改
-  // headers: {
-  // "Content-Type": "application/x-www-form-urlencoded"
-  // },
+  timeout: 10000, // 请求的超时时间
   withCredentials: true // 允许携带cookie
 })
 
@@ -22,14 +18,10 @@ axios.defaults.transformRequest = [function (data) {
 
 // request拦截器
 service.interceptors.request.use(
-  config => {
-    // 发送请求之前，要做的业务
+  config => { // 发送请求之前，要做的业务
     return config
   },
-  error => {
-    // 错误处理代码
-    console.log(error)
-
+  error => { // 错误处理代码
     return Promise.reject(error)
   }
 )

@@ -143,11 +143,11 @@ export default {
       .num {
         box-sizing: border-box;
         position: absolute;
-        top: 0px;
+        top: -5px;
         font-size: 3px; /*no*/
         width: auto;
         text-align: center;
-        padding-left: 53%;
+        padding-left: 58%;
       }
     }
     .more-btn {

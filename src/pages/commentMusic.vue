@@ -1,14 +1,15 @@
 <template>
+<transition :name="slideName">
   <div class="main">
     <div class="header" :style="statusbar">
         <div class="back" @click.stop="closeComment">
           <strong class="iconback iconfont"></strong>
         </div>
         <div class="text">
-          <h1 class="title" style="margin: 0;padding: 0;border: 0;font-size: 100%;font-weight: 400;vertical-align: baseline;">评论</h1>
+          <h1 class="title" style="margin: 0;padding: 0;border: 0;font-size: 100%;font-weight: 400;vertical-align: baseline;">热门评论</h1>
         </div>
     </div>
-    <scroll :data="comment" :click="true">
+    <scroll :data="hotComment" :click="true">
       <div class="list">
         <div class="songDetail">
           <img
@@ -27,7 +28,7 @@
         <div class="hot_comment">
           <h1 class="title">精彩评论</h1>
           <ul>
-            <li class="item" v-for="(item, index) in comment" :key="index">
+            <li class="item" v-for="(item, index) in hotComment" :key="index">
               <div class="user">
                 <div class="left">
                   <img
@@ -53,14 +54,21 @@
       </div>
     </scroll>
   </div>
+</transition>
 </template>
 <script>
 import scroll from '@/components/scroll'
+import { songComment } from '@/base/api'
 export default {
   data () {
     return {
       statusbar: {},
-      artistNew: []
+      artistNew: [],
+      image: '',
+      name: '',
+      singer: '',
+      hotComment: [],
+      slideName: 'up'
     }
   },
   mounted () {
@@ -71,32 +79,19 @@ export default {
         this.plusLoad()
       })
     }
-  },
-  props: {
-    image: {
-      type: String,
-      default () {
-        return ''
+    const params = this.$route.params || {}
+    this.image = params.image
+    this.singer = params.singer
+    this.name = params.name
+    const id = params.id
+    songComment(id).then(res => {
+      if (res.status === 200) {
+        const data = res.data
+        if (data.code === 200) {
+          this.hotComment = data.hotComments
+        }
       }
-    },
-    name: {
-      type: String,
-      default () {
-        return ''
-      }
-    },
-    singer: {
-      type: String,
-      default () {
-        return ''
-      }
-    },
-    comment: {
-      type: Array,
-      default () {
-        return []
-      }
-    }
+    })
   },
   components: {
     scroll
@@ -112,7 +107,7 @@ export default {
       }
     },
     closeComment () {
-      this.$emit('closeComment')
+      this.$router.go(-1)
     }
   }
 }
@@ -121,6 +116,25 @@ export default {
 <style scoped lang="scss">
 @import "@/common/scss/icon.scss";
 @import "@/common/scss/index.scss";
+.up-enter {
+   -webkit-transform: translate3d(0,100%,0);
+   -moz-transform: translate3d(0,100%,0);
+   -ms-transform: translate3d(0,100%,0);
+   transform: translate3d(0,100%,0);
+}
+.up-enter-active {
+  transition: 300ms;
+}
+.up-leave-to {
+  z-index: 10;
+  -webkit-transform: translate3d(0,100%,0);
+  -moz-transform: translate3d(0,100%,0);
+  -ms-transform: translate3d(0,100%,0);
+  transform: translate3d(0,100%,0);
+}
+.up-leave-active {
+  transition: 300ms;
+}
 .main {
   width: 100%;
   height: 100%;
@@ -129,9 +143,9 @@ export default {
   .list {
     width: 100%;
     height: auto;
-    padding-bottom: 40px;
+    padding-bottom: 90px;
     background-color: #ffffff;
-    padding-top: 90px;
+    padding-top: 60px;
   }
   .songDetail {
     width: 100%;

@@ -305,7 +305,7 @@ export default {
     align-items: center;
     width: 100%;
     height: 40px;
-    padding-left: 16px;
+    padding-left: 8px;
     border-bottom: 1px solid rgb(228, 228, 228);
     .iconfont {
       font-size: 18px;

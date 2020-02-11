@@ -13,7 +13,7 @@
           </div>
         </scroll>
       </popup>
-      <musicBox @singerclick="showSinger" v-immersed :currentMusic="currentMusic" @percentChangeEnd="seekTo" :playType="playing?'play':'pause'"></musicBox>
+      <musicBox :commentCount="commentCount" @openComment="openComment" @singerclick="showSinger" v-immersed :currentMusic="currentMusic" @percentChangeEnd="seekTo" :playType="playing?'play':'pause'"></musicBox>
     </div>
   </transition>
 </template>
@@ -21,12 +21,13 @@
 <script>
 import musicBox from '@/components/musicBox'
 import { mapGetters, mapState } from 'vuex'
-// import { artistDetail } from '@/base/api'
+import { songComment } from '@/base/api'
 import scroll from '@/components/scroll'
 import { Popup, Cell } from 'mint-ui'
 export default {
   data () {
     return {
+      commentCount: '0',
       slideName: 'up',
       popupVisible: false,
       currentMusic: {
@@ -80,6 +81,16 @@ export default {
       } else {
         this.toast('繁忙，请稍后再试')
       }
+    },
+    openComment () {
+      this.popupVisible = false
+      this.slideName = ''
+      this.$nextTick(() => {
+        this.$bus.emit('player-hide')
+        const currentSong = this.currentSong
+        const params = {id: currentSong.id, image: currentSong.image, name: currentSong.name, singer: currentSong.singer}
+        this.$router.push({name: 'commentMusic', params: params})
+      })
     }
   },
   watch: {
@@ -89,6 +100,18 @@ export default {
         for (let key in this.currentMusic) {
           currentMusic[key] = val[key]
         }
+        songComment(val.id).then(res => {
+          if (res.status === 200) {
+            const data = res.data
+            if (data.code === 200) {
+              let total = data.total + ''
+              if (total.length > 4) {
+                total = `${total.slice(0, total.length - 4)}w+`
+              }
+              this.commentCount = total
+            }
+          }
+        })
       },
       deep: true
     },
