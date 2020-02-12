@@ -58,7 +58,7 @@ import {
   recommendSongs
 } from '@/base/api'
 import { swiper, swiperSlide } from '@/components/vue-awesome-swiper'
-import { createRecommendSong } from '@/base/song'
+import { createRecommendSong, createBannerSong } from '@/base/song'
 import scroll from '@/components/scroll'
 export default {
   data () {
@@ -106,7 +106,7 @@ export default {
               const obj = {
                 image: e.imageUrl || e.picUrl || e.pic,
                 url: e.url,
-                song: e.song ? createRecommendSong(e) : null,
+                song: e.song ? createBannerSong(e) : null,
                 target: e.targetId === '0' ? '' : e.targetId
               }
               list.push(obj)

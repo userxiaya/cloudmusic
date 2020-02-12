@@ -22,7 +22,7 @@ function singerName (arr) {
 export function createRecommendSong (music) {
   const artists = music.artists || music.song.artists || []
   const album = music.album || music.song.album || []
-  return new Song({
+  const result = new Song({
     id: music.id,
     singer: singerName(artists),
     name: music.name,
@@ -30,6 +30,20 @@ export function createRecommendSong (music) {
     image: album.picUrl,
     artist: artists
   })
+  return result
+}
+export function createBannerSong (music) {
+  const artists = music.artists || music.song.artists || music.song.ar || []
+  const album = music.album || music.song.album || music.song.al || []
+  const result = new Song({
+    id: music.id || music.song.id,
+    singer: singerName(artists),
+    name: music.name || music.song.name,
+    album: album,
+    image: album.picUrl,
+    artist: artists
+  })
+  return result
 }
 
 export function createRecommendListSong (music) {
